@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser  = require('body-parser');
 
-var	bdd = require('./module/bddmysql');
+var	user = require('./module/user');
 
 var app = express();
 
@@ -20,9 +20,9 @@ app.options('/api/*', function (request, response, next) {
     response.send();
 });
  
-
-app.get('/user', bdd.findByEmailPassUser);
-app.post('/user', bdd.addUser);
+// utilisation de la bdd pour le user
+app.get('/user', user.add);
+app.post('/user', user.findByEmailPassUser);
 
 
 app.listen(3000);
