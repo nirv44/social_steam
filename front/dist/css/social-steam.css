@@ -1,3 +1,10 @@
 .hand-cursor {
   cursor: pointer;
 }
+
+button {
+  background-color:#d0fe00;
+  color:#333;
+  border:0px solid #d0fe00;
+  font-weight:bold;
+}

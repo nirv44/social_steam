@@ -1,3 +1,22 @@
+angular.module('app', ['app.controllers', 'ngRoute'])
+.config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+    .when('/login', {
+        templateUrl: 'pages/login.html',
+        controller: 'LoginController',
+        controllerAs: 'loginCtrl'
+    })
+    .when('/main', {
+        templateUrl: 'pages/mainpage.html',
+        controller: 'MainPageController',
+        controllerAs: 'mainPageCtrl'
+    })
+    .otherwise({ redirectTo: '/login' });
+}]);
+
+// Define all modules
+angular.module('app.controllers', []);
+
 /*! AdminLTE app.js
  * ================
  * Main JS application file for AdminLTE v2. This file
