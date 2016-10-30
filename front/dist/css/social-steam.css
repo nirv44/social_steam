@@ -1,3 +1,7 @@
+.full-height-view {
+  height: 100vh;
+}
+
 .hand-cursor {
   cursor: pointer;
 }
