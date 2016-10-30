@@ -1,4 +1,4 @@
-angular.module('app', ['app.controllers', 'ngRoute'])
+angular.module('app', ['app.controllers', 'app.services', 'ngRoute'])
 .config(['$routeProvider', function($routeProvider) {
     $routeProvider
     .when('/login', {
@@ -7,15 +7,31 @@ angular.module('app', ['app.controllers', 'ngRoute'])
         controllerAs: 'loginCtrl'
     })
     .when('/main', {
-        templateUrl: 'pages/mainpage.html',
+        templateUrl: 'pages/mainPage.html',
         controller: 'MainPageController',
         controllerAs: 'mainPageCtrl'
+    })
+    .when('/main/1', {
+        templateUrl: 'pages/mainPage1.html',
+        controller: 'MainPage1Controller',
+        controllerAs: 'mainPage1Ctrl'
+    })
+    .when('/main/2', {
+        templateUrl: 'pages/mainPage2.html',
+        controller: 'MainPage2Controller',
+        controllerAs: 'mainPage2Ctrl'
+    })
+    .when('/main/3', {
+        templateUrl: 'pages/mainPage3.html',
+        controller: 'MainPage3Controller',
+        controllerAs: 'mainPage3Ctrl'
     })
     .otherwise({ redirectTo: '/login' });
 }]);
 
 // Define all modules
 angular.module('app.controllers', []);
+angular.module('app.services', []);
 
 /*! AdminLTE app.js
  * ================

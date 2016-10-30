@@ -129,6 +129,7 @@ module.exports = function (grunt) {
       },
       dist: [
         'dist/css/AdminLTE.css',
+        'dist/css/social-steam.css',
       ]
     },
 
