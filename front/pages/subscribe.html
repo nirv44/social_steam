@@ -1,0 +1,71 @@
+<!-- Main header -->
+<header class="main-header">
+  <nav class="navbar navbar-static-top" role="navigation">
+    <div class="navbar-nav navbar-nav-header">
+      <img class="pull-left" src="dist/img/favicon.png" width="48" height="48"/>
+      <span><b>S</b>ocial <b>S</b>team</span>
+    </div>
+  </nav>
+</header>
+
+<!-- Content Panel -->
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>Inscription</h1>
+  </section>
+  
+  <section class="row content">
+    <div class="form-group marg-20 pad-10">
+      <label class="col-xs-3 control-label">Login</label>
+      <div class="col-xs-7">
+        <input type="text" ng-model="subscriber.login">
+      </div>
+    </div>
+    
+    <div class="form-group marg-20 pad-10">
+      <label class="col-xs-3 control-label">Mot de passe</label>
+      <div class="col-xs-7">
+        <input type="text" ng-model="subscriber.password">
+      </div>
+    </div>
+    
+    <div class="form-group marg-20 pad-10">
+      <label class="col-xs-3 control-label">Confirmer mot de passe</label>
+      <div class="col-xs-7">
+        <input type="text" ng-model="subscriber.confirmedPassword">
+      </div>
+    </div>
+    
+    <div class="form-group marg-20 pad-10">
+      <label class="col-xs-3 control-label">Nom</label>
+      <div class="col-xs-7">
+        <input type="text" ng-model="subscriber.lastname">
+      </div>
+    </div>
+    
+    <div class="form-group marg-20 pad-10">
+      <label class="col-xs-3 control-label">Prénom</label>
+      <div class="col-xs-7">
+        <input type="text" ng-model="subscriber.firstname">
+      </div>
+    </div>
+    
+    <div class="form-group marg-20 pad-10">
+      <label class="col-xs-3 control-label">Adresse mail</label>
+      <div class="col-xs-7">
+        <input type="text" ng-model="subscriber.mail">
+      </div>
+    </div>
+    
+    <div class="form-group marg-20 pad-10">
+      <button ng-click="doSubscribe()" class="subscribe-btn">S'inscrire</button>
+      <button ng-click="doCancel()">Annuler</button>
+    </div>
+  </section>
+</div>
+
+<!-- Footer Panel -->
+<footer class="main-footer">
+  <strong>Copyright &copy; 2016.</strong> All rights reserved.
+  <div class="pull-right hidden-xs">Projet EPSI I4</div>
+</footer>

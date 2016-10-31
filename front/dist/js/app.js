@@ -6,6 +6,11 @@ angular.module('app', ['app.controllers', 'app.services', 'ngRoute'])
         controller: 'LoginController',
         controllerAs: 'loginCtrl'
     })
+    .when('/subscribe', {
+        templateUrl: 'pages/subscribe.html',
+        controller: 'SubscribeController',
+        controllerAs: 'subscribeCtrl'
+    })
     .when('/main', {
         templateUrl: 'pages/mainPage.html',
         controller: 'MainPageController',
