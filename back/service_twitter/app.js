@@ -2,7 +2,9 @@ var express = require('express');
 var bodyParser  = require('body-parser');
 
 var	bdd = require('./module/bddmysql');
+var twitter = require('./module/gestionTwitter');
 var	secure = require('./module/security');
+
 
 var app = express();
 
@@ -21,14 +23,12 @@ app.options('/api/*', function (request, response, next) {
     response.send();
 });
  
+app.post('/tweet', bdd.addtwitter);
+app.post('/sendtweet', twitter.sendPLayingInTwiter);
 
-app.get('/user', bdd.findByEmailPassUser);
-app.post('/user', bdd.addUser);
-app.put('/user/:id', bdd.updateUser);
-app.delete('/user/:id', bdd.deleteUser);
 
 app.get('/logs', secure.securityToken);
 
 
-app.listen(3001);
-console.log('SERVICE USER - Listening on port 3001...');
+app.listen(3002);
+console.log('SERVICE TWITER - Listening on port 3002...');
