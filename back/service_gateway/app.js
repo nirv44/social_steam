@@ -1,7 +1,8 @@
 var express = require('express');
 var bodyParser  = require('body-parser');
 
-var	user = require('./module/user');
+
+var	user = require('./module/user_gateway');
 
 var app = express();
 
@@ -20,9 +21,18 @@ app.options('/api/*', function (request, response, next) {
     response.send();
 });
  
+
+
 // utilisation de la bdd pour le user
-app.get('/user', user.add);
-app.post('/user', user.findByEmailPassUser);
+app.get('/user', user.Inscription);
+app.post('/user', user.Connexion);
+
+
+
+app.get('/test', user.test);
+
+
+
 
 
 app.listen(3000);
