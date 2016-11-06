@@ -1,5 +1,5 @@
 angular.module('app.controllers')
-.controller('SubscribeController', function($scope, $location) {
+.controller('SubscribeController', function($scope, $location, services) {
   
   $scope.subscriber = {
     login: '', 
@@ -10,10 +10,17 @@ angular.module('app.controllers')
     mail: ''
   };
   
+  // Launch user subscription
   $scope.doSubscribe = function() {
-    $location.path( "/login" );
+    try {
+      services.subscribe($scope.subscriber);
+      $location.path( "/login" );
+    } catch (e) {
+      console.log(e.name + ' : ' + e.message);
+    }
   };
   
+  // Returns to login page
   $scope.doCancel = function() {
     $location.path( "/login" );
   };

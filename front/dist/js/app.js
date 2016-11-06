@@ -1,40 +1,6 @@
-angular.module('app', ['app.controllers', 'app.services', 'ngRoute'])
-.config(['$routeProvider', function($routeProvider) {
-    $routeProvider
-    .when('/login', {
-        templateUrl: 'pages/login.html',
-        controller: 'LoginController',
-        controllerAs: 'loginCtrl'
-    })
-    .when('/subscribe', {
-        templateUrl: 'pages/subscribe.html',
-        controller: 'SubscribeController',
-        controllerAs: 'subscribeCtrl'
-    })
-    .when('/main', {
-        templateUrl: 'pages/mainPage.html',
-        controller: 'MainPageController',
-        controllerAs: 'mainPageCtrl'
-    })
-    .when('/main/1', {
-        templateUrl: 'pages/mainPage1.html',
-        controller: 'MainPage1Controller',
-        controllerAs: 'mainPage1Ctrl'
-    })
-    .when('/main/2', {
-        templateUrl: 'pages/mainPage2.html',
-        controller: 'MainPage2Controller',
-        controllerAs: 'mainPage2Ctrl'
-    })
-    .when('/main/3', {
-        templateUrl: 'pages/mainPage3.html',
-        controller: 'MainPage3Controller',
-        controllerAs: 'mainPage3Ctrl'
-    })
-    .otherwise({ redirectTo: '/login' });
-}]);
-
 // Define all modules
+angular.module('app', ['app.routes', 'app.controllers', 'app.services']);
+angular.module('app.routes', ['ngRoute']);
 angular.module('app.controllers', []);
 angular.module('app.services', []);
 

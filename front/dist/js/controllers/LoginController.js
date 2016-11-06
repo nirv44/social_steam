@@ -1,16 +1,22 @@
 angular.module('app.controllers')
-.controller('LoginController', function($scope, $location) {
+.controller('LoginController', function($scope, $location, services) {
   
   $scope.user = {
     login: '', 
     password: ''
   };
   
+  // Launch user authentication
   $scope.doLogin = function() {
-    console.log($scope.user);
-    $location.path( "/main" );
+    try {
+      services.login($scope.user);
+      $location.path( "/main" );
+    } catch (e) {
+      console.log(e.name + ' : ' + e.message);
+    }
   };
   
+  // Go to subscription page
   $scope.subscribe = function() {
     $location.path( "/subscribe" );
   };
