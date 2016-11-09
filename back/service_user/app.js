@@ -20,12 +20,15 @@ app.options('/api/*', function (request, response, next) {
     response.header("Access-Control-Allow-Methods", "GET, POST");
     response.send();
 });
- 
+
+
+
+
 
 app.get('/user', bdd.findByEmailPassUser);
 app.post('/user', bdd.addUser);
-app.put('/user/:id', bdd.updateUser);
-app.delete('/user/:id', bdd.deleteUser);
+//app.put('/user/:id', bdd.updateUser);
+
 
 app.get('/logs', secure.securityToken);
 

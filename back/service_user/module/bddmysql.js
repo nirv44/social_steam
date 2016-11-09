@@ -1,6 +1,6 @@
 var mysql      = require('mysql');
 
-var	secure = require('./module/security');
+var	secure = require('./security');
 
 
 var connection = mysql.createConnection({
@@ -19,10 +19,7 @@ connection.connect();
 //var user = {
 //  id: Number,
 //  email: String,
-//  password: String,
-//  nomTwitter: String,
-//	nomFacebook: String,
-//	nomSteam: String
+//  password: String
 //};
 
 

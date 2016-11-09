@@ -1,8 +1,7 @@
 var express = require('express');
 var bodyParser  = require('body-parser');
 
-var	bdd = require('./module/bddmysql');
-var twitter = require('./module/gestionTwitter');
+var steam = require('./module/gestionSteam');
 var	secure = require('./module/security');
 
 
@@ -23,12 +22,11 @@ app.options('/api/*', function (request, response, next) {
     response.send();
 });
 
-app.post('/tweet', bdd.addtwitter);
-app.post('/sendtweet', twitter.sendPLayingInTwiter);
 
+app.get('/steam', steam.getInformationSteamByUser);
 
 app.get('/logs', secure.securityToken);
 
 
-app.listen(3002);
-console.log('SERVICE TWITER - Listening on port 3002...');
+app.listen(3003);
+console.log('SERVICE STEAM - Listening on port 3003...');

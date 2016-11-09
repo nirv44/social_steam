@@ -11,7 +11,7 @@ opt : import ami steam
 penser a faire une doc api avec swagger
 hapi
 
-api gateway (1 service fb, 1 service twitter, 1 srevice steam, 1 service user) gateway 
+api gateway (1 service fb, 1 service twitter, 1 service steam, 1 service user) gateway 
 basic auth - jwt
 
 

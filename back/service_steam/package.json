@@ -1,0 +1,15 @@
+{
+  "name": "pack_service_rest_steam",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "4.x",
+    "body-parser": "*",
+    "jsonwebtoken": "*",
+    "mysql": "*",
+    "steam-web": "*"
+  },
+  "author": "VIVION Nicolas",
+  "license": "VIVION Corp."
+}

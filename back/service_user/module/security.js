@@ -47,7 +47,7 @@ exports.verifytoken = function(req) {
 	if(token) {
 		var decode = jwt.verify(token, secretGateway);
 		if(decode.login == login && decode.mdp == modp){
-			return req;
+			return true;
 		}
 	}
 	return false;
