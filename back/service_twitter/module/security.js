@@ -16,6 +16,7 @@ var modp 			= "jemapellecommentstjames";
 // le token s'insere dans le header
 
 
+
 // Vérifie si les identifiant concorde
 // Si oui alors on renvoi un token
 // Entré : Identifiant
