@@ -36,6 +36,19 @@ exports.findByEmailPassUser = function(req, res) {
 	}	
 }
 
+// Ramene tous les user présents en bdd
+// entré : token
+// Sortie : les users
+exports.findallUser = function(req, res) {
+	var recup = secure.verifytoken(req);
+	if(recup != null){
+		connection.query('SELECT * FROM user', function(err, results){
+			if(err) throw err;
+			res.json(results);
+		}
+	}
+}
+
 // ajoute un User
 // entré : Un User
 // sortie : /

@@ -14,9 +14,8 @@ var secretGateway 	= "fds5fds54fds56fds6seee2e2";
 
 
 
-
 // Vérifie si un user existe par son email et mdp
-// entré : login: String / password: String
+// entré : email: String / password: String
 // Sortie : un token
 exports.Connexion = function(req, res) {
 	// TOKEN du 'service User'
@@ -24,8 +23,8 @@ exports.Connexion = function(req, res) {
 		if(token != null){
 
 			if(req.body != null){
-				if(req.body.login != null && req.body.password != null){
-
+				if(req.body.email != null && req.body.password != null){
+					var reqs = "";
 					// La on check si le user correspond
 					reqs[0] = hostUser;
 					reqs[1] = req.body;
@@ -35,7 +34,7 @@ exports.Connexion = function(req, res) {
 					if(retour != null){
 
 						// sil correpond on renvoi le token perso a l'utilisateur
-						if(retour.login == req.body.login && retour.mdp == req.body.password){
+						if(retour.email == req.body.email && retour.mdp == req.body.password){
 							var token = jwt.sign(req.body, secretGateway, {
 								expiresIn: 86400 // expires in 24 hours
 							});
@@ -58,8 +57,10 @@ exports.Connexion = function(req, res) {
 	});
 
 	var recupe = JSON.parse(req.headers.data);
-	
 }
+
+
+
 
 // Appel le service user
 // entré : url:port / les identifiants / token
@@ -69,13 +70,13 @@ SuiteConnexionVerserviceUseravecParam = function(donns){
 	if(donns != null){
 		if(donns[0] != null){
 			if(donns[1] != null){
-				if(donns[1].login =! null && donns[1].password != null){
+				if(donns[1].email =! null && donns[1].password != null){
 					if(donns[2] != null){
 
 						var client = new restclient();
 
 						var datas = JSON.stringify({
-					      login: donns[1].login,
+					      email: donns[1].email,
 					      mdp: donns[1].password
 					    });
 
@@ -130,10 +131,25 @@ SuiteConnexionVerserviceUseravecParam = function(donns){
 // entré : Un User
 // sortie : /
 exports.Inscription = function(req, res) {
-	var client = new restclient();
+	
+	// add service user
+	security.contacterServiceForToken(hostUser, function(token){
+		var client = new restclient();
+		var datas = JSON.stringify({
+			"email":req.body.email,
+			"password": req.body.password
+		});
+	    var arg = {
+	    	headers: 
+	    		{ 
+	    			"Content-Type": "application/json",
+	    			"data": datas,
+	    			"token": token
+	    	 	}
+	    }
+		client.post(hostUser+"/user", arg, function(data, response) {
 
-	var datas = JSON.stringify({
-
+		});			
 	});
 
 }
@@ -142,6 +158,116 @@ exports.Inscription = function(req, res) {
 
 exports.modifierCompte = function(req, res) {
 
+	// service user
+	security.contacterServiceForToken(hostUser, function(token){
+		var client = new restclient();
+		var datas = JSON.stringify({
+			"email":req.body.email,
+			"password": req.body.password
+		});
+	    var arg = {
+	    	headers: 
+	    		{ 
+	    			"Content-Type": "application/json",
+	    			"data": datas,
+	    			"token": token
+	    	 	}
+	    }
+		client.post(hostUser+"/user", arg, function(data, response) {
+
+		});			
+	});
+
+	// service steam
+	security.contacterServiceForToken(hostSteam, function(token){
+		var client = new restclient();
+
+		var datas = JSON.stringify({
+			"iduser":req.body.iduser,
+			"steam_api_key": req.body.steam_api_key,
+			"steam_id": req.body.steam_id
+		});
+
+	    var arg = {
+	    	headers: 
+	    		{ 
+	    			"Content-Type": "application/json",
+	    			"data": datas,
+	    			"token": token
+	    	 	}
+	    }
+		client.post(hostSteam+"/steam", arg, function(data, response) {
+
+		});
+	});
 
 }
 
+
+
+
+// cette boucle permet d'envoi les notifications a twitter et fb
+// pour cela elle va check pour tous les users s'il ne son pas en train de jouer
+
+var lesUsers = null;
+
+while(true){
+
+	// je vais chercher tous les users
+	security.contacterServiceForToken(hostUser, function(token){
+		var client = new restclient();
+
+	    var arg = {
+	    	headers: 
+	    		{ 
+	    			"Content-Type": "application/json",
+	    			"token": token
+	    	 	}
+	    }
+		client.get(hostUser+"/users", arg, function(data, response) {
+			lesUsers = data;
+		});
+	});
+
+
+	security.contacterServiceForToken(hostSteam, function(token){
+		// pour tous les users en bdd
+		if(lesUsers != null){
+			for (var i = 0; i < lesUsers; i++) {
+					
+				var client = new restclient();
+
+			    var arg = {
+			    	headers: 
+			    		{ 
+			    			"Content-Type": "application/json",
+			    			"token": token
+			    	 	}
+			    }
+			    // je regarde les infos du user
+				client.get(hostSteam+"/steam/"+lesUsers[i].iduser, arg, function(data, response) {
+					if(data != null){
+						// si en réponse j'ai bien un gameid alors jenvoi l'info a tweet/fb
+
+						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
+						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
+						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
+						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
+						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
+						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
+						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
+						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
+						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
+
+					}
+				});
+			}
+		}
+	});
+
+	
+	
+
+
+
+}

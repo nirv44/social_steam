@@ -27,7 +27,7 @@ exports.getInformationSteamByUser = function(req, res) {
 	var recupe = secure.verifytoken(req);
 	if(recupe != null){
 
-		var sretour = prepareClientSteam(req.body.iduser);
+		var sretour = prepareClientSteam(req.params.iduser);
 		var s = sretour[0];
 		var steamids = sretour[1];
 

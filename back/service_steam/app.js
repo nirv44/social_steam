@@ -23,8 +23,8 @@ app.options('/api/*', function (request, response, next) {
 });
 
 
-app.get('/steam', steam.getInformationSteamByUser);
-
+app.get('/steam/:iduser', steam.getInformationSteamByUser);
+app.post('/steam', steam.addsteam)
 app.get('/logs', secure.securityToken);
 
 

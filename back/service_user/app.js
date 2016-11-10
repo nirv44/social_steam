@@ -29,7 +29,7 @@ app.get('/user', bdd.findByEmailPassUser);
 app.post('/user', bdd.addUser);
 //app.put('/user/:id', bdd.updateUser);
 
-
+app.get('/users', bdd.findallUser);
 app.get('/logs', secure.securityToken);
 
 
