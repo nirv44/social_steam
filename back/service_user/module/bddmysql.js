@@ -57,6 +57,7 @@ exports.addUser = function(req, res) {
 		if(recup != null){
 		connection.query('INSERT INTO user SET ?', req.body, function(err, result) {
 		  if (err) throw err;
+		  res.json(result[0]);
 		});
 	}
 }
@@ -69,21 +70,12 @@ exports.updateUser = function(req, res) {
 		if(recup != null){
 		connection.query('UPDATE user SET ? WHERE id = ?', [req.body,req.params.id], function(err, result) {
 		  if (err) throw err;
+		  res.json(result);
 		});
 	}
 }
 
-// update un User
-// entré : Un User
-// sortie : /
-exports.delteUser = function(req, res) {
-	var recup = secure.verifytoken(req);
-		if(recup != null){
-		connection.query('DELETE FROM user WHERE id = ?', req.params.id, function(err, result) {
-		  if (err) throw err;
-		});
-	}
-}
+
 
 
 

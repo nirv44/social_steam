@@ -35,6 +35,7 @@ exports.addtwitter = function(req, res) {
 	if(recup != null){
 		connection.query('INSERT INTO twittergestion SET ?', req.body, function(err, result) {
 	  		if (err) throw err;
+	  		res.json(result);
 		});
 	}
 }

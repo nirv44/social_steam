@@ -33,9 +33,19 @@ connection.connect();
 exports.addsteam = function(req, res) {
 	var recup = secure.verifytoken(req);
 	if(recup != null){
-		connection.query('INSERT INTO steamgestion SET ?', req.body, function(err, result) {
-	  		if (err) throw err;
-		});
+
+		// Petite vérif s'il existe deja / sinon update des données
+		if(chercheKeyAndId != null){
+			connection.query('UPDATE steamgestion SET ? WHERE id = ?', [req.body, req.params.id], function(err, results){
+				if(err) throw err;
+				res.json(results);
+			});
+		}else{
+			connection.query('INSERT INTO steamgestion SET ?', req.body, function(err, result) {
+		  		if (err) throw err;
+		  		res.json(results);
+			});
+		}
 	}
 }
 

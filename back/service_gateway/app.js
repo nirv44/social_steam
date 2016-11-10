@@ -28,7 +28,7 @@ app.options('/api/*', function (request, response, next) {
 
 app.get('/user', user.Inscription);
 app.post('/user', user.Connexion);
-app.put('/user', user.modifierCompte);
+app.put('/user/:iduser', user.modifierCompte);
 
 
 

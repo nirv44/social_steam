@@ -173,7 +173,7 @@ exports.modifierCompte = function(req, res) {
 	    			"token": token
 	    	 	}
 	    }
-		client.post(hostUser+"/user", arg, function(data, response) {
+		client.put(hostUser+"/user/"+req.params.iduser, arg, function(data, response) {
 
 		});			
 	});
@@ -183,7 +183,7 @@ exports.modifierCompte = function(req, res) {
 		var client = new restclient();
 
 		var datas = JSON.stringify({
-			"iduser":req.body.iduser,
+			"iduser":req.params.iduser,
 			"steam_api_key": req.body.steam_api_key,
 			"steam_id": req.body.steam_id
 		});
