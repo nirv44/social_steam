@@ -136,7 +136,7 @@ exports.Inscription = function(req, res) {
 	security.contacterServiceForToken(hostUser, function(token){
 		var client = new restclient();
 		var datas = JSON.stringify({
-			"email":req.body.email,
+			"email": req.body.email,
 			"password": req.body.password
 		});
 	    var arg = {
@@ -148,7 +148,8 @@ exports.Inscription = function(req, res) {
 	    	 	}
 	    }
 		client.post(hostUser+"/user", arg, function(data, response) {
-
+			// penser a false si pas ok
+			res.json({success: true})
 		});			
 	});
 
@@ -220,7 +221,7 @@ exports.checkifplaying = function(req, res){
 				var client = new restclient();
 			    var arg = {
 			    	headers: 
-			    		{ 
+			    		{
 			    			"Content-Type": "application/json",
 			    			"token": token
 			    	 	}
