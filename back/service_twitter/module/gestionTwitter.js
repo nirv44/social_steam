@@ -1,7 +1,7 @@
 var Twitter = require('twitter');
 
-var bdd = require('./module/bddmysql');
-var secure = require('./module/security');
+var bdd = require('./bddmysql');
+var secure = require('./security');
 
 
 

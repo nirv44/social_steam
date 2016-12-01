@@ -40,4 +40,4 @@ app.put('/user/:iduser', user.modifierCompte);
 
 
 app.listen(3000);
-console.log('Listening on port 3000...');
+console.log('SREVICE GATEWAY - Listening on port 3000...');

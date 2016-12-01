@@ -45,7 +45,7 @@ exports.test = function(req, res){
 // Ce log sur le service
 // envoi les identifiants
 // retourne un token
-contacterServiceForToken = function(host, res) {
+exports.contacterServiceForToken = function(host, res) {
 	var client = new restclient();
 
 	var datas = JSON.stringify({

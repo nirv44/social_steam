@@ -211,32 +211,13 @@ exports.modifierCompte = function(req, res) {
 
 var lesUsers = null;
 
-while(true){
-
-	// je vais chercher tous les users
-	security.contacterServiceForToken(hostUser, function(token){
-		var client = new restclient();
-
-	    var arg = {
-	    	headers: 
-	    		{ 
-	    			"Content-Type": "application/json",
-	    			"token": token
-	    	 	}
-	    }
-		client.get(hostUser+"/users", arg, function(data, response) {
-			lesUsers = data;
-		});
-	});
-
+exports.checkifplaying = function(req, res){
 
 	security.contacterServiceForToken(hostSteam, function(token){
 		// pour tous les users en bdd
 		if(lesUsers != null){
 			for (var i = 0; i < lesUsers; i++) {
-					
 				var client = new restclient();
-
 			    var arg = {
 			    	headers: 
 			    		{ 
@@ -244,20 +225,21 @@ while(true){
 			    			"token": token
 			    	 	}
 			    }
+
 			    // je regarde les infos du user
-				client.get(hostSteam+"/steam/"+lesUsers[i].iduser, arg, function(data, response) {
+				client.get(hostSteam+"/steam/"+req.params.iduser, arg, function(data, response) {
 					if(data != null){
 						// si en réponse j'ai bien un gameid alors jenvoi l'info a tweet/fb
 
-						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
-						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
-						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
-						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
-						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
-						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
-						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
-						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
-						// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
+						if(data.gameid != null || data.gameid > 0){
+
+							// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
+							// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
+							// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
+
+
+
+						}
 
 					}
 				});
@@ -266,8 +248,5 @@ while(true){
 	});
 
 	
-	
-
-
-
 }
+

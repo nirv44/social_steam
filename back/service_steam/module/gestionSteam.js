@@ -1,8 +1,8 @@
 var steam = require('steam-web');
 
 
-var bdd = require('./module/bddmysql');
-var secure = require('./module/security');
+var bdd = require('./bddmysql');
+var secure = require('./security');
 
 
 // Prepare les infos du compte Steam

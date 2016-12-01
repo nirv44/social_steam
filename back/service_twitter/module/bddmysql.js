@@ -1,6 +1,6 @@
 var mysql      = require('mysql');
 
-var	secure = require('./module/security');
+var	secure = require('./security');
 
 
 var connection = mysql.createConnection({

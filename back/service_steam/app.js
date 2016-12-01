@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser  = require('body-parser');
 
+var bdd = require('./module/bddmysql');
 var steam = require('./module/gestionSteam');
 var	secure = require('./module/security');
 
@@ -24,7 +25,7 @@ app.options('/api/*', function (request, response, next) {
 
 
 app.get('/steam/:iduser', steam.getInformationSteamByUser);
-app.post('/steam', steam.addsteam)
+app.post('/steam', bdd.addsteam);
 app.get('/logs', secure.securityToken);
 
 
