@@ -16,11 +16,18 @@ connection.connect();
 // ________________________ //
 // Exemple d'un user en bdd //
 // ________________________ //
-//var user = {
+
 //  id: Number,
 //  email: String,
 //  password: String
-//};
+//  steam_api_key: String,
+//	steam_id: String
+//  iduser: Number,
+//  consumer_key: String,
+//	consumer_secret: String,
+//	access_token_key: String,
+//	access_token_secret: String
+
 
 
 // Vérifie si un user existe par son email et mdp
@@ -71,7 +78,7 @@ exports.addUser = function(req, res) {
 exports.updateUser = function(req, res) {
 	var recup = secure.verifytoken(req);
 		if(recup != false){
-		connection.query('UPDATE user SET ? WHERE id = ?', [JSON.parse(req.headers.data),req.params.id], function(err, result) {
+		connection.query('UPDATE user SET ? WHERE id = ?', [JSON.parse(req.headers.data),req.params.iduser], function(err, result) {
 		  if (err) throw err;
 		  res.json(result);
 		});

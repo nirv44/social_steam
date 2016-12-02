@@ -23,7 +23,7 @@ app.options('/api/*', function (request, response, next) {
     response.send();
 });
 
-app.post('/tweet', bdd.addtwitter);
+app.post('/tweet', bdd.twitter);
 app.post('/sendtweet', twitter.sendPLayingInTwiter);
 
 

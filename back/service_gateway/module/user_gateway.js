@@ -162,7 +162,15 @@ var SuiteConnexionVerserviceUseravecParam = function(donns, res){
 
 
 
-
+// User
+//  email: String,
+//  password: String
+//  steam_api_key: String,
+//	steam_id: String
+//  consumer_key: String,
+//	consumer_secret: String,
+//	access_token_key: String,
+//	access_token_secret: String
 
 // ajoute un User
 // entré : Un User
@@ -174,7 +182,13 @@ exports.Inscription = function(req, res) {
 			var client = new restclient();
 			var datas = JSON.stringify({
 				"email": req.body.email,
-				"password": req.body.password
+				"password": req.body.password,
+				"steam_api_key": req.body.steam_api_key,
+				"steam_id": req.body.steam_id,
+				"consumer_key": req.body.consumer_key,
+				"consumer_secret": req.body.consumer_secret,
+				"access_token_key": req.body.access_token_key,
+				"access_token_secret": req.body.access_token_secret
 			});
 		    var arg = {
 		    	headers: 
@@ -192,59 +206,64 @@ exports.Inscription = function(req, res) {
 			});	
 		}
 	});
+
+
+
+
 }
 
 
+
+
+// User
+//  email: String,
+//  password: String
+
+//  Steam
+//  iduser: Number,
+//  steam_api_key: String,
+//	steam_id: String
+
+//  Twitter
+//  iduser: Number,
+//  consumer_key: String,
+//	consumer_secret: String,
+//	access_token_key: String,
+//	access_token_secret: String
 
 exports.modifierCompte = function(req, res) {
 
 	// service user
 	security.contacterServiceForToken(hostUser, function(token){
-		var client = new restclient();
-		var datas = JSON.stringify({
-			"email":req.body.email,
-			"password": req.body.password
-		});
-	    var arg = {
-	    	headers: 
-	    		{ 
-	    			"Content-Type": "application/json",
-	    			"data": datas,
-	    			"token": token
-	    	 	}
-	    }
-		client.put(hostUser+"/user/"+req.params.iduser, arg, function(data, response) {
-
-		});			
-	});
-
-	// service steam
-	security.contacterServiceForToken(hostSteam, function(token){
-		var client = new restclient();
-
-		var datas = JSON.stringify({
-			"iduser":req.params.iduser,
-			"steam_api_key": req.body.steam_api_key,
-			"steam_id": req.body.steam_id
-		});
-
-	    var arg = {
-	    	headers: 
-	    		{ 
-	    			"Content-Type": "application/json",
-	    			"data": datas,
-	    			"token": token
-	    	 	}
-	    }
-		client.post(hostSteam+"/steam", arg, function(data, response) {
-
-		});
+		if (token != null){
+			var client = new restclient();
+			var datas = JSON.stringify({
+				"email": req.body.email,
+				"password": req.body.password,
+				"steam_api_key": req.body.steam_api_key,
+				"steam_id": req.body.steam_id,
+				"consumer_key": req.body.consumer_key,
+				"consumer_secret": req.body.consumer_secret,
+				"access_token_key": req.body.access_token_key,
+				"access_token_secret": req.body.access_token_secret
+			});
+		    var arg = {
+		    	headers: 
+		    		{ 
+		    			"Content-Type": "application/json",
+		    			"data": datas,
+		    			"token": token
+		    	 	}
+		    }
+			client.put(hostUser+"/user/"+req.params.iduser, arg, function(data, response) {
+				res.json({
+					success: true
+				});
+			});		
+		}	
 	});
 
 
-
-		//////////////
-		// PARTIE TWITTER 
 
 }
 
