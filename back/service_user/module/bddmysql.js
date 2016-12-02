@@ -28,55 +28,52 @@ connection.connect();
 // Sortie : un User
 exports.findByEmailPassUser = function(req, res) {
 	var recup = secure.verifytoken(req);
-	if(recup != null){
-		connection.query('SELECT * FROM user WHERE email = ? and password = ?', [req.body.email, req.body.password], function(err, results) {
+	if(recup != false){
+		connection.query('SELECT * FROM user WHERE email = ? and password = ?', [JSON.parse(req.headers.data).email, JSON.parse(req.headers.data).password], function(err, results) {
 		if (err) throw err;
 			res.json(results[0]);
 		});
-	}	
+	}
 }
+
 
 // Ramene tous les user présents en bdd
 // entré : token
 // Sortie : les users
 exports.findallUser = function(req, res) {
 	var recup = secure.verifytoken(req);
-	if(recup != null){
+	if(recup != false){
 		connection.query('SELECT * FROM user', function(err, results){
 			if(err) throw err;
 			res.json(results);
-		}
+		});
 	}
 }
+
 
 // ajoute un User
 // entré : Un User
 // sortie : /
-exports.addUser = function(req, res) {
+exports.addUser = function(req, res) {	
 	var recup = secure.verifytoken(req);
-		if(recup != null){
-		connection.query('INSERT INTO user SET ?', req.body, function(err, result) {
-		  if (err) throw err;
-		  res.json(result[0]);
+	if(recup != false){
+		connection.query('INSERT INTO user SET ?', JSON.parse(req.headers.data), function(err, result) {
+			if (err) throw err;
+			res.json({success: true});
 		});
 	}
 }
+
 
 // update un User
 // entré : Un User
 // sortie : /
 exports.updateUser = function(req, res) {
 	var recup = secure.verifytoken(req);
-		if(recup != null){
-		connection.query('UPDATE user SET ? WHERE id = ?', [req.body,req.params.id], function(err, result) {
+		if(recup != false){
+		connection.query('UPDATE user SET ? WHERE id = ?', [JSON.parse(req.headers.data),req.params.id], function(err, result) {
 		  if (err) throw err;
 		  res.json(result);
 		});
 	}
 }
-
-
-
-
-
-

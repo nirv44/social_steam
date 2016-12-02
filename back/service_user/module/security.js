@@ -43,7 +43,6 @@ exports.securityToken = function(req, res) {
 // Sortie : boolean (true si ok)
 exports.verifytoken = function(req) {
 	var token = req.headers['token'];
-
 	if(token) {
 		var decode = jwt.verify(token, secretGateway);
 		if(decode.login == login && decode.mdp == modp){
