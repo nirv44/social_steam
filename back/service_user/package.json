@@ -1,0 +1,14 @@
+{
+  "name": "pack_service_rest_user",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "4.x",
+    "body-parser": "*",
+    "jsonwebtoken": "*",
+    "mysql": "*"
+  },
+  "author": "VIVION Nicolas",
+  "license": "VIVION Corp."
+}
