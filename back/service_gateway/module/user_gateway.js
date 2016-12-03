@@ -104,7 +104,7 @@ exports.Connexion = function(req, res) {
 }
 
 
-
+/*
 
 // Appel le service user
 // entré : url:port / les identifiants / token
@@ -157,7 +157,7 @@ var SuiteConnexionVerserviceUseravecParam = function(donns, res){
 			}
 		}
 	}
-}
+}*/
 
 
 
