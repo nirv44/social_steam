@@ -6,6 +6,8 @@
   "dependencies": {
     "express": "4.x",
     "body-parser": "*",
+    "fs": "*",
+    "child_process":"*",
     "jsonwebtoken": "*",
     "mysql": "*",
     "steam-web": "*"
