@@ -13,6 +13,8 @@ var jwt 			= require('jsonwebtoken');
 var secretGateway 	= "fds5fds54fds56fds6seee2e2";
 
 
+var gestion = require("./gestion_gateway");
+
 
 // Vérifie si un user existe par son email et mdp
 // entré : email: String / password: String
@@ -28,13 +30,8 @@ exports.Connexion = function(req, res) {
 					donns[0] = hostUser;
 					donns[1] = JSON.stringify(req.body);
 					donns[2] = token;
-					
-					
-
-
-
-
-				// petit Check des données
+			
+					// petit Check des données
 					if(donns != null){
 						if(donns[0] != null){
 							if(donns[1] != null){
@@ -204,12 +201,10 @@ exports.Inscription = function(req, res) {
 					success: true
 				});
 			});	
+		}else{
+			
 		}
 	});
-
-
-
-
 }
 
 
@@ -270,8 +265,7 @@ exports.modifierCompte = function(req, res) {
 
 
 
-// cette boucle permet d'envoi les notifications a twitter et fb
-// pour cela elle va check pour tous les users s'il ne son pas en train de jouer
+// cette boucle permet d'envoi les notifications a twitter et f
 
 var lesUsers = null;
 
@@ -296,7 +290,6 @@ exports.checkifplaying = function(req, res){
 						// si en réponse j'ai bien un gameid alors jenvoi l'info a tweet/fb
 
 						if(data.gameid != null || data.gameid > 0){
-
 							// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
 							// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
 							// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
@@ -311,6 +304,5 @@ exports.checkifplaying = function(req, res){
 		}
 	});
 
-	
 }
 

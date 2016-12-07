@@ -1,4 +1,3 @@
-
-echo Demarage du service !!!
+@echo off
 
 node app.js

@@ -59,6 +59,9 @@ exports.checkifplaying = function(req, res){
                 if(data.gameid != null || data.gameid > 0){
                     // TWITTER
                     security.contacterServiceForToken(hosttwitter, function(token) {
+
+                        var nomdujeux = "";
+                        
                         var client2 = new restclient();
                         var arg2 = {
                             headers:
@@ -66,7 +69,7 @@ exports.checkifplaying = function(req, res){
                                 "Content-Type": "application/json",
                                 "token": token,
                                 "iduser":req.params.iduser,
-                                "tweet": "Hey mec je joue !"
+                                "tweet": "Hey mec je joue a"+ nomdujeux + " !"
                             }
                         }
                         client2.post(hosttwitter+"/sendtweet", arg, function(aller, responseTwitter){
@@ -80,6 +83,5 @@ exports.checkifplaying = function(req, res){
         });
 
     });
-
 
 }
