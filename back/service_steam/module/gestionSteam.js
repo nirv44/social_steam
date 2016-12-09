@@ -1,3 +1,4 @@
+"use strict";
 var steam = require('steam-web');
 
 
@@ -25,7 +26,7 @@ prepareClientSteam = function(iduser){
 
 exports.getInformationSteamByUser = function(req, res) {
 	var recupe = secure.verifytoken(req);
-	if(recupe != null){
+	if(recupe != false){
 
 		var sretour = prepareClientSteam(req.params.iduser);
 		var s = sretour[0];
@@ -49,7 +50,8 @@ exports.getInformationSteamByUser = function(req, res) {
 		}else{
 			res.json({success: false});
 		}
-
+	}else{
+		res.json({success: false});
 	}
 }
 

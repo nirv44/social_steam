@@ -1,9 +1,9 @@
+"use strict";
 var express = require('express');
 var bodyParser  = require('body-parser');
-
+var swagger = require('swagger-express');
 
 var	user = require('./module/user_gateway');
-//var	a = require('./module/security_inter_service');
 
 var app = express();
 
@@ -31,13 +31,16 @@ app.post('/connexion', user.Connexion);
 app.put('/user/:iduser', user.modifierCompte);
 
 
-
-
-
-
-// test a supprimer
-//app.get('/test', a.test);
+app.use(swagger.init(app, {
+    apiVersion: '1.0',
+    swaggerVersion: '1.0',
+    basePath: 'http://localhost:3000',
+    swaggerURL: '/swagger',
+    swaggerUI: './public/swagger/',
+    apis: ['./module/user_gateway.js']
+}));
 
 
 app.listen(3000);
-console.log('SREVICE GATEWAY - Listening on port 3000...');
+console.log('SERVICE GATEWAY - Listening on port 3000...');
+console.log('SERVICE GATEWAY - DOC : /swagger');

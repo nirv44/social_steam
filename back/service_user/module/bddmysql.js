@@ -63,6 +63,8 @@ exports.findByEmailPassUser = function(req, res) {
 		if (err) throw err;
 			res.json(results[0]);
 		});
+	}else{
+		res.json({success: false});
 	}
 }
 
@@ -94,6 +96,8 @@ exports.findallUser = function(req, res) {
 			if(err) throw err;
 			res.json(results);
 		});
+	}else{
+		res.json({success: false});
 	}
 }
 
@@ -163,6 +167,8 @@ exports.addUser = function(req, res) {
 			if (err) throw err;
 			res.json({success: true});
 		});
+	}else{
+		res.json({success: false});
 	}
 }
 
@@ -238,6 +244,8 @@ exports.updateUser = function(req, res) {
 		  if (err) throw err;
 		  res.json(result);
 		});
+	}else{
+		res.json({success: false});
 	}
 }
 

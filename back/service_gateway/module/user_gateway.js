@@ -1,19 +1,16 @@
+"use strict";
 
-
-var restclient = require('node-rest-client').Client;
-
-var security = require('./security_inter_service');
-
-var hostUser = "http://127.0.0.1:3001";
-var hostTwitter = "http://127.0.0.1:3002";
-var hostSteam = "http://127.0.0.1:3003";
-
-
+var restclient 		= require('node-rest-client').Client;
 var jwt 			= require('jsonwebtoken');
-var secretGateway 	= "fds5fds54fds56fds6seee2e2";
+var security 		= require('./security_inter_service');
+var gestion 		= require('./gestion_gateway');
+var securityClient	= require('./security_gateway');
 
+var hostUser 		= gestion.recuperationInfos().hostUser;
+var hostTwitter 	= gestion.recuperationInfos().hostTwitter;
+var hostSteam 		= gestion.recuperationInfos().hostSteam;
+var secretGateway 	= gestion.recuperationInfos().secretGateway;
 
-var gestion = require("./gestion_gateway");
 
 
 // Vérifie si un user existe par son email et mdp
@@ -45,7 +42,6 @@ exports.Connexion = function(req, res) {
 									      password: JSON.parse(donns[1]).password
 									    });
 
-
 									    var arg = {
 									    	headers:
 									    		{ 
@@ -54,7 +50,6 @@ exports.Connexion = function(req, res) {
 									    			"token": donns[2]
 									    	 	}
 									    }
-
 
 										client.get(donns[0] +"/user", arg, function(data, respo) {
 											if(data != null){
@@ -75,16 +70,9 @@ exports.Connexion = function(req, res) {
 												res.json({success: false});
 											}
 										}).on('error', function(error) {
-											if(error.code === "ECONNREFUSED"){
-												console.log("Service "+ donns[0] +" down");
-												res.json({success: false});
-											}else{
-												console.log("Erreur avec le service");
-												res.json({success: false});
-											}
+											gestion.gestionErreur(error);
+											res.json({success : false});
 										});
-
-
 									}
 								}
 							}
@@ -100,61 +88,6 @@ exports.Connexion = function(req, res) {
 
 }
 
-
-/*
-
-// Appel le service user
-// entré : url:port / les identifiants / token
-// Sortie : user
-var SuiteConnexionVerserviceUseravecParam = function(donns, res){
-	// petit Check des données
-	if(donns != null){
-		if(donns[0] != null){
-			if(donns[1] != null){
-				if(JSON.parse(donns[1]).email =! null && JSON.parse(donns[1]).password != null){
-					if(donns[2] != null){
-
-
-						var client = new restclient();
-						var datas = JSON.stringify({
-					      email: JSON.parse(donns[1]).email,
-					      password: JSON.parse(donns[1]).password
-					    });
-
-
-					    var arg = {
-					    	headers:
-					    		{ 
-					    			"Content-Type": "application/json",
-					    			"data": datas,
-					    			"token": donns[2]
-					    	 	}
-					    }
-
-
-						client.get(donns[0] +"/user", arg, function(data, res) {
-							if(data != null){
-								res(data);
-							}else{
-								res(null);
-							}
-						}).on('error', function(error) {
-							if(error.code === "ECONNREFUSED"){
-								console.log("Service "+ donns[0] +" down");
-								res(null);
-							}else{
-								console.log("Erreur avec le service");
-								res(null);
-							}
-						});
-
-
-					}
-				}
-			}
-		}
-	}
-}*/
 
 
 
@@ -177,16 +110,7 @@ exports.Inscription = function(req, res) {
 	security.contacterServiceForToken(hostUser, function(token){
 		if (token != null){
 			var client = new restclient();
-			var datas = JSON.stringify({
-				"email": req.body.email,
-				"password": req.body.password,
-				"steam_api_key": req.body.steam_api_key,
-				"steam_id": req.body.steam_id,
-				"consumer_key": req.body.consumer_key,
-				"consumer_secret": req.body.consumer_secret,
-				"access_token_key": req.body.access_token_key,
-				"access_token_secret": req.body.access_token_secret
-			});
+			var datas = parseUser(req);
 		    var arg = {
 		    	headers: 
 		    		{ 
@@ -200,6 +124,9 @@ exports.Inscription = function(req, res) {
 				res.json({
 					success: true
 				});
+			}).on('error', function(error) {
+				gestion.gestionErreur(error);
+				res.json({success : false});
 			});	
 		}else{
 			
@@ -227,82 +154,126 @@ exports.Inscription = function(req, res) {
 //	access_token_secret: String
 
 exports.modifierCompte = function(req, res) {
+	var retour = securityClient.verifytoken(req);
 
-	// service user
-	security.contacterServiceForToken(hostUser, function(token){
-		if (token != null){
-			var client = new restclient();
-			var datas = JSON.stringify({
-				"email": req.body.email,
-				"password": req.body.password,
-				"steam_api_key": req.body.steam_api_key,
-				"steam_id": req.body.steam_id,
-				"consumer_key": req.body.consumer_key,
-				"consumer_secret": req.body.consumer_secret,
-				"access_token_key": req.body.access_token_key,
-				"access_token_secret": req.body.access_token_secret
-			});
-		    var arg = {
-		    	headers: 
-		    		{ 
-		    			"Content-Type": "application/json",
-		    			"data": datas,
-		    			"token": token
-		    	 	}
-		    }
-			client.put(hostUser+"/user/"+req.params.iduser, arg, function(data, response) {
-				res.json({
-					success: true
-				});
-			});		
-		}	
-	});
-
-
-
-}
-
-
-
-
-// cette boucle permet d'envoi les notifications a twitter et f
-
-var lesUsers = null;
-
-exports.checkifplaying = function(req, res){
-
-	security.contacterServiceForToken(hostSteam, function(token){
-		// pour tous les users en bdd
-		if(lesUsers != null){
-			for (var i = 0; i < lesUsers; i++) {
+	if(retour != false){
+		security.contacterServiceForToken(hostUser, function(token){
+			if (token != null){
 				var client = new restclient();
+				var datas = parseUser(req);
 			    var arg = {
 			    	headers: 
-			    		{
+			    		{ 
 			    			"Content-Type": "application/json",
+			    			"data": datas,
 			    			"token": token
 			    	 	}
 			    }
-
-			    // je regarde les infos du user
-				client.get(hostSteam+"/steam/"+req.params.iduser, arg, function(data, response) {
-					if(data != null){
-						// si en réponse j'ai bien un gameid alors jenvoi l'info a tweet/fb
-
-						if(data.gameid != null || data.gameid > 0){
-							// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
-							// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
-							// DUUUUUU COOOOOODE A FAIRE ICI !!!!!!!!!!!!!!!
-
-
-
-						}
-
-					}
-				});
-			}
-		}
-	});
-
+				client.put(hostUser+"/user/"+req.params.iduser, arg, function(data, response) {
+					res.json({
+						success: true
+					});
+				}).on('error', function(error) {
+					gestion.gestionErreur(error);
+					res.json({success : false});
+				});		
+			}	
+		});
+	}else{
+		res.json({success: false});
+	}
 }
 
+
+
+
+
+
+var parseUser = function(req){
+	return JSON.stringify({
+		"email": req.body.email,
+		"password": req.body.password,
+		"steam_api_key": req.body.steam_api_key,
+		"steam_id": req.body.steam_id,
+		"consumer_key": req.body.consumer_key,
+		"consumer_secret": req.body.consumer_secret,
+		"access_token_key": req.body.access_token_key,
+		"access_token_secret": req.body.access_token_secret
+	});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+exports.checkifplaying = function(req, res){
+    var userid = req.body.iduser;
+
+
+    security.contacterServiceForToken(hostSteam, function(token){
+        var client = new restclient();
+        var arg = {
+            headers: 
+                {
+                    "Content-Type": "application/json",
+                    "token": token
+                }
+        };
+
+        // je regarde les infos du user
+        client.get(hostSteam+"/steam/"+req.params.iduser, arg, function(data, response) {
+            if(data != null){
+                // si en réponse j'ai bien un gameid alors jenvoi l'info a tweet/fb
+                if(data.gameid != null || data.gameid > 0){
+                    // TWITTER
+                    security.contacterServiceForToken(hosttwitter, function(token) {
+
+                        var nomdujeux = "";
+                        
+                        var client2 = new restclient();
+                        var arg2 = {
+                            headers:
+                            {
+                                "Content-Type": "application/json",
+                                "token": token,
+                                "iduser":req.params.iduser,
+                                "tweet": "Hey mec je joue a"+ nomdujeux + " !"
+                            }
+                        }
+                        client2.post(hosttwitter+"/sendtweet", arg, function(aller, responseTwitter){
+                            
+                        }).on('error', function(error) {
+							gestion.gestionErreur(error);
+							res.json({success : false});
+						});	
+                    });
+
+                    //FB A FAIRE SI LE TEMPS
+                }
+            }
+        });
+
+    });
+
+}

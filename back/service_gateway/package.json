@@ -10,6 +10,7 @@
     "child_process":"*",
     "jsonwebtoken": "*",
     "mysql": "*",
+    "swagger-express":"*",
     "steam-web": "*"
   },
   "author": "VIVION Nicolas",

@@ -1,5 +1,7 @@
+"use strict";
 var express = require('express');
 var bodyParser  = require('body-parser');
+var swagger = require('swagger-express');
 
 var bdd = require('./module/bddmysql');
 var steam = require('./module/gestionSteam');
@@ -23,11 +25,20 @@ app.options('/api/*', function (request, response, next) {
     response.send();
 });
 
+app.use(swagger.init(app, {
+    apiVersion: '1.0',
+    swaggerVersion: '1.0',
+    basePath: 'http://localhost:3003',
+    swaggerURL: '/swagger',
+    swaggerUI: './public/swagger/',
+    apis: ['./module/bddmysql.js','./module/security.js']
+}));
+
 
 app.get('/steam/:iduser', steam.getInformationSteamByUser);
-app.post('/steam', bdd.addsteam);
 app.get('/logs', secure.securityToken);
 
 
 app.listen(3003);
 console.log('SERVICE STEAM - Listening on port 3003...');
+console.log('SERVICE STEAM - DOC : /swagger');

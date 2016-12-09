@@ -1,3 +1,4 @@
+"use strict";
 var fs = require('fs');
 var child_process = require('child_process');
 
@@ -8,9 +9,9 @@ gestion.recuperationInfos(function(retour){
     console.log(retour);
 });
 */
-exports.recuperationInfos = function(res){
+exports.recuperationInfos = function(){
     var jsonRetour = fs.readFileSync("./infos/infos.json","UTF8");
-    res(JSON.parse(jsonRetour));
+    return JSON.parse(jsonRetour);
 }
 
 
@@ -34,54 +35,3 @@ exports.reexecuteService = function(){
     });
 }
 
-
-// Exemple a remettre dans le user gateway
-exports.checkifplaying = function(req, res){
-    var userid = req.body.iduser;
-    var hostSteam = "http://127.0.0.1:3003";
-    var hosttwitter = "http://127.0.0.1:3002";
-
-
-    security.contacterServiceForToken(hostSteam, function(token){
-        var client = new restclient();
-        var arg = {
-            headers: 
-                {
-                    "Content-Type": "application/json",
-                    "token": token
-                }
-        };
-
-        // je regarde les infos du user
-        client.get(hostSteam+"/steam/"+req.params.iduser, arg, function(data, response) {
-            if(data != null){
-                // si en réponse j'ai bien un gameid alors jenvoi l'info a tweet/fb
-                if(data.gameid != null || data.gameid > 0){
-                    // TWITTER
-                    security.contacterServiceForToken(hosttwitter, function(token) {
-
-                        var nomdujeux = "";
-                        
-                        var client2 = new restclient();
-                        var arg2 = {
-                            headers:
-                            {
-                                "Content-Type": "application/json",
-                                "token": token,
-                                "iduser":req.params.iduser,
-                                "tweet": "Hey mec je joue a"+ nomdujeux + " !"
-                            }
-                        }
-                        client2.post(hosttwitter+"/sendtweet", arg, function(aller, responseTwitter){
-                            
-                        });
-                    });
-
-                    //FB
-                }
-            }
-        });
-
-    });
-
-}

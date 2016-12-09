@@ -3,44 +3,7 @@
 var jwt    = require('jsonwebtoken');
 
 var restclient = require('node-rest-client').Client;
-
-
-//___________________________________________________
-//_____________Securité vers les service ____________
-//___________________________________________________
-
-
-
-
-/*
-exports.test = function(req, res){
-	var host = "http://127.0.0.1:3001";
-	var token = contacterServiceForToken(host, function(token){
-		console.log(token);
-		var client = new restclient();
-		var arg = {
-	    	headers: 
-	    		{ 
-	    			"Content-Type": "application/json",
-	    			"token": token
-	    	 	}
-	    }
-
-		client.get(host+"/user", arg, function(data, response) {
-			
-			
-		}).on('error', function(error) {
-			if(error.code === "ECONNREFUSED"){
-				console.log("Service "+ host+" down");
-			}else{
-				console.log("Erreur avec le service")
-			}
-		});
-
-	});
-}
-*/
-
+var gestion 	= require('./gestion_gateway');
 
 // Ce log sur le service
 // envoi les identifiants
@@ -49,8 +12,8 @@ exports.contacterServiceForToken = function(host, res) {
 	var client = new restclient();
 
 	var datas = JSON.stringify({
-      login: "nico",
-      mdp: "jemapellecommentstjames"
+      login: gestion.recuperationInfos().login,
+      mdp: gestion.recuperationInfos().mdp
     });
 
     var arg = {

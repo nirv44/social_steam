@@ -1,3 +1,4 @@
+"use strict";
 var express = require('express');
 var bodyParser  = require('body-parser');
 var swagger = require('swagger-express');
@@ -25,14 +26,11 @@ app.options('/api/*', function (request, response, next) {
 });
 
 
-//////////////////////
-/// SWAGGER PARTIE ///
 app.use(swagger.init(app, {
     apiVersion: '1.0',
     swaggerVersion: '1.0',
     basePath: 'http://localhost:3002',
     swaggerURL: '/swagger',
-    swaggerJSON: '/api-docs.json',
     swaggerUI: './public/swagger/',
     apis: ['./module/gestionTwitter.js']
 }));

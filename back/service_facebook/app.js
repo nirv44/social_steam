@@ -25,8 +25,20 @@ app.options('/api/*', function (request, response, next) {
 
 
 
+app.use(swagger.init(app, {
+    apiVersion: '1.0',
+    swaggerVersion: '1.0',
+    basePath: 'http://localhost:3004',
+    swaggerURL: '/swagger',
+    swaggerUI: './public/swagger/',
+    apis: ['./module/bddmysql.js','./module/security.js']
+}));
+
+
+
 
 
 
 app.listen(3004);
 console.log('SERVICE FACEBOOK - Listening on port 3004...');
+console.log('SERVICE FACEBOOK - DOC : /swagger');

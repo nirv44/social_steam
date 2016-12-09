@@ -8,6 +8,7 @@
     "body-parser": "*",
     "jsonwebtoken": "*",
     "mysql": "*",
+    "swagger-express":"*",
     "steam-web": "*"
   },
   "author": "VIVION Nicolas",

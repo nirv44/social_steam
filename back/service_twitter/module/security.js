@@ -1,4 +1,4 @@
-
+"use strict";
 //___________________________________________________
 //___________________________________________________
 //__________Securité vers le service gateway_________
@@ -7,10 +7,10 @@
 
 
 var jwt 			= require('jsonwebtoken');
-
-var secretGateway 	= "monsecretdelagatexay0123875";
-var login 			= "nico";
-var modp 			= "jemapellecommentstjames";
+var gestion 		= require('./infos_twitter');
+var secretGateway 	= gestion.recuperationInfos().secretGateway;
+var login 			= gestion.recuperationInfos().login;
+var mdp 			= gestion.recuperationInfos().mdp;
 
 /// IMPORTANT ///
 // le token s'insere dans le header
@@ -24,7 +24,7 @@ var modp 			= "jemapellecommentstjames";
 exports.securityToken = function(req, res) {
 	var recupe = JSON.parse(req.headers.data);
 
-	if(recupe.login == login && recupe.mdp == modp){
+	if(recupe.login == login && recupe.mdp == mdp){
 		var token = jwt.sign(recupe, secretGateway, {
 			expiresIn: 86400 // expires in 24 hours
 		});
@@ -47,7 +47,7 @@ exports.verifytoken = function(req) {
 
 	if(token) {
 		var decode = jwt.verify(token, secretGateway);
-		if(decode.login == login && decode.mdp == modp){
+		if(decode.login == login && decode.mdp == mdp){
 			return true;
 		}
 	}

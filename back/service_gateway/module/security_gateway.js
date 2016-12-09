@@ -7,8 +7,9 @@
 
 
 var jwt 			= require('jsonwebtoken');
+var gestion 		= require('./gestion_gateway');
 
-var secretGateway 	= "fds5fds54fds56fds6seee2e2";
+var secretGateway 	= gestion.recuperationInfos().secretGateway;
 
 
 // Permet de savoir si le token recut est bon

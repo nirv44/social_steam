@@ -1,9 +1,9 @@
 /**
  * @swagger
- * resourcePath: /service_twitter
+ * resourcePath: /
  * description: service Twitter
  */
-
+"use strict";
 var Twitter = require('twitter');
 
 var bdd = require('./bddmysql');
@@ -56,7 +56,7 @@ prepareClientTwitter = function(iduser){
  */
 exports.sendPLayingInTwiter = function (req, res) {
 	var recupe = secure.verifytoken(req);
-	if(recupe != null){
+	if(recupe != false){
 
 
 		var client = prepareClientTwitter(req.body.iduser);
@@ -66,11 +66,16 @@ exports.sendPLayingInTwiter = function (req, res) {
 					res.json({success: false});
 				}
 				res.json({success: true});
-			});
+			}).on('error', function(error) {
+				gestion.gestionErreur(error);
+				res.json({success : false});
+			});	
 		}else{
 			res.json({success: false});
 		}
 
+	}else{
+		res.json({success: false});
 	}
 
 }

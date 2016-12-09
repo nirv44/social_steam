@@ -1,3 +1,4 @@
+"use strict";
 var mysql      = require('mysql');
 
 var	secure = require('./security');
@@ -10,7 +11,9 @@ var connection = mysql.createConnection({
   database : 'social_steam_db'
 });
  
-connection.connect();
+connection.connect(function(err) {
+  console.log("Il faut penser a démarer la base de donnée");
+});
  
 
 
