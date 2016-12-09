@@ -27,58 +27,69 @@ exports.Connexion = function(req, res) {
 					donns[0] = hostUser;
 					donns[1] = JSON.stringify(req.body);
 					donns[2] = token;
-			
-					// petit Check des données
-					if(donns != null){
-						if(donns[0] != null){
-							if(donns[1] != null){
-								if(JSON.parse(donns[1]).email =! null && JSON.parse(donns[1]).password != null){
-									if(donns[2] != null){
+				
+
+					var email="";
+					var password="";
+
+					try{
+						email = JSON.parse(donns[1]).email;
+						password = JSON.parse(donns[1]).password;
+					
+						// petit Check des données
+						if(donns != null){
+							if(donns[0] != null){
+								if(donns[1] != null){
+									if(email =! null && password != null){
+										if(donns[2] != null){
 
 
-										var client = new restclient();
-										var datas = JSON.stringify({
-									      email: JSON.parse(donns[1]).email,
-									      password: JSON.parse(donns[1]).password
-									    });
+											var client = new restclient();
+											var datas = JSON.stringify({
+										      email: email,
+										      password: password
+										    });
+										    var arg = {
+										    	headers:
+										    		{ 
+										    			"Content-Type": "application/json",
+										    			"data": datas,
+										    			"token": donns[2]
+										    	 	}
+										    }
 
-									    var arg = {
-									    	headers:
-									    		{ 
-									    			"Content-Type": "application/json",
-									    			"data": datas,
-									    			"token": donns[2]
-									    	 	}
-									    }
+											client.get(donns[0] +"/user", arg, function(data, respo) {
+												if(data != null){
+													// sil correpond on renvoi le token perso a l'utilisateur
+													if(data.email == req.body.email && data.password == req.body.password){
+														var token = jwt.sign(req.body, secretGateway, {
+															expiresIn: 86400 // expires in 24 hours
+														});
 
-										client.get(donns[0] +"/user", arg, function(data, respo) {
-											if(data != null){
-												// sil correpond on renvoi le token perso a l'utilisateur
-												if(data.email == req.body.email && data.password == req.body.password){
-													var token = jwt.sign(req.body, secretGateway, {
-														expiresIn: 86400 // expires in 24 hours
-													});
-
-													res.json({
-														success: true,
-														token: token
-													});
+														res.json({
+															success: true,
+															token: token
+														});
+													}else{
+														res.json({success: false});
+													}
 												}else{
 													res.json({success: false});
 												}
-											}else{
-												res.json({success: false});
-											}
-										}).on('error', function(error) {
-											gestion.gestionErreur(error);
-											res.json({success : false});
-										});
+											}).on('error', function(error) {
+												gestion.gestionErreur(error);
+												res.json({success : false});
+											});
+
+										}
 									}
 								}
 							}
 						}
+					}catch(e) {
+						console.log("Vérifie ton email/password");
+						res.json({success: false});
 					}
-
 
 				}
 			}

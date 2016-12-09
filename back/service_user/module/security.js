@@ -3,6 +3,7 @@
  * resourcePath: /security
  * description: service utilsateur
  */
+"use strict";
 var jwt 			= require('jsonwebtoken');
 var gestion 		= require('./infos_user');
 var secretGateway 	= gestion.recuperationInfos().secretGateway;
@@ -35,21 +36,28 @@ var mdp 			= gestion.recuperationInfos().mdp;
  *          dataType: string
  */
 exports.securityToken = function(req, res) {
-	var recupe = JSON.parse(req.headers.data);
 
-	if(recupe.login == login && recupe.mdp == mdp){
-		var token = jwt.sign(recupe, secretGateway, {
-			expiresIn: 86400 // expires in 24 hours
-		});
-		
-		res.json({
-			success: true,
-			token: token
-		});
-	}else{
+	var recupe = "";
+
+	try{
+		JSON.parse(req.headers.data);
+
+		if(recupe.login == login && recupe.mdp == mdp){
+			var token = jwt.sign(recupe, secretGateway, {
+				expiresIn: 86400 // expires in 24 hours
+			});
+			
+			res.json({
+				success: true,
+				token: token
+			});
+		}else{
+			res.json({success: false});
+		}
+	}catch(e) {
+		console.log("Token non valide");
 		res.json({success: false});
 	}
-	
 }
 
 

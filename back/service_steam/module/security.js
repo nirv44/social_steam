@@ -23,18 +23,25 @@ var mdp 			= gestion.recuperationInfos().mdp;
 // Entré : Identifiant
 // Sortie : Token liée
 exports.securityToken = function(req, res) {
-	var recupe = JSON.parse(req.headers.data);
+	var recupe = "";
 
-	if(recupe.login == login && recupe.mdp == mdp){
-		var token = jwt.sign(recupe, secretGateway, {
-			expiresIn: 86400 // expires in 24 hours
-		});
-		
-		res.json({
-			success: true,
-			token: token
-		});
-	}else{
+	try{
+		recupre = JSON.parse(req.headers.data);
+
+		if(recupe.login == login && recupe.mdp == mdp){
+			var token = jwt.sign(recupe, secretGateway, {
+				expiresIn: 86400 // expires in 24 hours
+			});
+			
+			res.json({
+				success: true,
+				token: token
+			});
+		}else{
+			res.json({success: false});
+		}
+	}catch(e){
+		console.log("Token non valide");
 		res.json({success: false});
 	}
 	
