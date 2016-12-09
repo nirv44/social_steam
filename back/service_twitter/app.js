@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser  = require('body-parser');
+var swagger = require('swagger-express');
 
 var	bdd = require('./module/bddmysql');
 var twitter = require('./module/gestionTwitter');
@@ -23,12 +24,23 @@ app.options('/api/*', function (request, response, next) {
     response.send();
 });
 
-app.post('/tweet', bdd.twitter);
+
+//////////////////////
+/// SWAGGER PARTIE ///
+app.use(swagger.init(app, {
+    apiVersion: '1.0',
+    swaggerVersion: '1.0',
+    basePath: 'http://localhost:3002',
+    swaggerURL: '/swagger',
+    swaggerJSON: '/api-docs.json',
+    swaggerUI: './public/swagger/',
+    apis: ['./module/gestionTwitter.js']
+}));
+
 app.post('/sendtweet', twitter.sendPLayingInTwiter);
-
-
 app.get('/logs', secure.securityToken);
 
 
 app.listen(3002);
 console.log('SERVICE TWITER - Listening on port 3002...');
+console.log('SERVICE TWITTER - DOC : /swagger');

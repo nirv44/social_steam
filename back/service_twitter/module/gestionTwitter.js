@@ -1,3 +1,9 @@
+/**
+ * @swagger
+ * resourcePath: /service_twitter
+ * description: service Twitter
+ */
+
 var Twitter = require('twitter');
 
 var bdd = require('./bddmysql');
@@ -5,10 +11,6 @@ var secure = require('./security');
 
 
 
-
-
-
-// Prepare le compte twitter sur lequel va être poster les tweets
 prepareClientTwitter = function(iduser){
 	
 	var client = null;
@@ -30,8 +32,28 @@ prepareClientTwitter = function(iduser){
 
 
 
-// Poste un tweet
-// Entré : le tweet a poster
+/**
+ * @swagger
+ * path: /sendtweet
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Envoi un twee
+ *      notes: Envoi un tweet sur le compte concerné
+ *      nickname: tweet
+ *      consumes: 
+ *        - text/html
+ *      parameters:
+ *        - name: email
+ *          description: Votre mail
+ *          paramType: query
+ *          required: true
+ *          dataType: string
+ *        - name: password
+ *          description: Votre mot de passe
+ *          paramType: query
+ *          required: true
+ *          dataType: string
+ */
 exports.sendPLayingInTwiter = function (req, res) {
 	var recupe = secure.verifytoken(req);
 	if(recupe != null){

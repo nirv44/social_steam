@@ -1,3 +1,10 @@
+
+
+/**
+ * @swagger
+ * resourcePath: /
+ * description: service utilsateur
+ */
 var mysql      = require('mysql');
 
 var	secure = require('./security');
@@ -16,28 +23,39 @@ connection.connect(function(err) {
   console.log("table : user");
   console.log("id: int,  email: String,  password: String, steam_api_key: String, steam_id: String, iduser: int, consumer_key: String,consumer_secret: String, access_token_key: String, access_token_secret: String")
 });
- 
-
-// ________________________ //
-// Exemple d'un user en bdd //
-// ________________________ //
-
-//  id: Number,
-//  email: String,
-//  password: String
-//  steam_api_key: String,
-//	steam_id: String
-//  iduser: Number,
-//  consumer_key: String,
-//	consumer_secret: String,
-//	access_token_key: String,
-//	access_token_secret: String
 
 
 
-// Vérifie si un user existe par son email et mdp
-// entré : email: String / password: String
-// Sortie : un User
+	
+
+/**
+ * @swagger
+ * path: /user
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Connexion avec un mail et mot de passe
+ *      notes: Retourne un utilisateur liée a l'email / mot de passe
+ *      responseClass: User
+ *      nickname: login
+ *      consumes: 
+ *        - text/html
+ *      parameters:
+ *        - name: email
+ *          description: Votre mail (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: string
+ *        - name: password
+ *          description: Votre mot de passe (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: string
+ *        - name: token
+ *          description: le token qui doit etre generer par /logs (headers.token)
+ *          paramType: headers
+ *          required: true
+ *          dataType: string
+ */
 exports.findByEmailPassUser = function(req, res) {
 	var recup = secure.verifytoken(req);
 	if(recup != false){
@@ -49,9 +67,26 @@ exports.findByEmailPassUser = function(req, res) {
 }
 
 
-// Ramene tous les user présents en bdd
-// entré : token
-// Sortie : les users
+
+
+/**
+ * @swagger
+ * path: /users
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: lit tous les utilisateurs en base
+ *      notes: Retourne tous les utilisateurs
+ *      responseClass: User
+ *      nickname: Lire tous les utilisateurs
+ *      consumes: 
+ *        - text/html
+ *      parameters:
+ *        - name: token
+ *          description: le token qui doit etre generer par /logs (headers.token)
+ *          paramType: headers
+ *          required: true
+ *          dataType: string
+ */
 exports.findallUser = function(req, res) {
 	var recup = secure.verifytoken(req);
 	if(recup != false){
@@ -63,9 +98,64 @@ exports.findallUser = function(req, res) {
 }
 
 
-// ajoute un User
-// entré : Un User
-// sortie : /
+/**
+ * @swagger
+ * path: /user
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Ajouter un utilsateur
+ *      notes: Retourne true (si ok) ou false (si pas ok)
+ *      responseClass: User
+ *      nickname: Ajouter
+ *      consumes: 
+ *        - text/html
+ *      parameters:
+ *        - name: email
+ *          description: Votre mail (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: string
+ *        - name: password
+ *          description: Votre mot de passe (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: string
+ *        - name: steam_api_key
+ *          description: Votre clé steam (headers.data)
+ *          paramType: headers
+ *          required: false
+ *          dataType: string
+ *        - name: steam_id
+ *          description: Votre ID Steam (headers.data)
+ *          paramType: headers
+ *          required: false
+ *          dataType: string
+ *        - name: consumer_key
+ *          description: Votre clé twitter (headers.data)
+ *          paramType: headers
+ *          required: false
+ *          dataType: string
+ *        - name: consumer_secret
+ *          description: Votre clé secrete twitter (headers.data)
+ *          paramType: headers
+ *          required: false
+ *          dataType: string
+ *        - name: access_token_key
+ *          description: Votre token twitter (headers.data)
+ *          paramType: headers
+ *          required: false
+ *          dataType: string
+ *        - name: access_token_secret
+ *          description: Votre token secret twitter (headers.data)
+ *          paramType: headers
+ *          required: false
+ *          dataType: string
+ *        - name: token
+ *          description: le token qui doit etre generer par /logs (headers.token)
+ *          paramType: headers
+ *          required: true
+ *          dataType: string
+ */
 exports.addUser = function(req, res) {	
 	var recup = secure.verifytoken(req);
 	if(recup != false){
@@ -77,9 +167,70 @@ exports.addUser = function(req, res) {
 }
 
 
-// update un User
-// entré : Un User
-// sortie : /
+
+/**
+ * @swagger
+ * path: /user/{iduser}
+ * operations:
+ *   -  httpMethod: PUT
+ *      summary: Modifie un utilsateur
+ *      notes: Retourne l'utilisateur modifier
+ *      responseClass: User
+ *      nickname: Modifier
+ *      consumes: 
+ *        - text/html
+ *      parameters:
+ *        - name: iduser
+ *          description: Votre id utilisateur (params)
+ *          paramType: params
+ *          required: true
+ *          dataType: int
+ *        - name: email
+ *          description: Votre mail (headers.data)
+ *          paramType: headers
+ *          required: false
+ *          dataType: string
+ *        - name: password
+ *          description: Votre mot de passe (headers.data)
+ *          paramType: headers
+ *          required: false
+ *          dataType: string
+ *        - name: steam_api_key
+ *          description: Votre clé steam (headers.data)
+ *          paramType: headers
+ *          required: false
+ *          dataType: string
+ *        - name: steam_id
+ *          description: Votre ID Steam (headers.data)
+ *          paramType: headers
+ *          required: false
+ *          dataType: string
+ *        - name: consumer_key
+ *          description: Votre clé twitter (headers.data)
+ *          paramType: headers
+ *          required: false
+ *          dataType: string
+ *        - name: consumer_secret
+ *          description: Votre clé secrete twitter (headers.data)
+ *          paramType: headers
+ *          required: false
+ *          dataType: string
+ *        - name: access_token_key
+ *          description: Votre token twitter (headers.data)
+ *          paramType: headers
+ *          required: false
+ *          dataType: string
+ *        - name: access_token_secret
+ *          description: Votre token secret twitter (headers.data)
+ *          paramType: headers
+ *          required: false
+ *          dataType: string
+ *        - name: token
+ *          description: le token qui doit etre generer par /logs (headers.token)
+ *          paramType: headers
+ *          required: true
+ *          dataType: string
+ */
 exports.updateUser = function(req, res) {
 	var recup = secure.verifytoken(req);
 		if(recup != false){
@@ -89,3 +240,31 @@ exports.updateUser = function(req, res) {
 		});
 	}
 }
+
+
+
+
+
+/**
+ * @swagger
+ * models:
+ *   User:
+ *     id: User
+ *     properties:
+ *       email:
+ *         type: String
+ *       password:
+ *         type: String
+ *       steam_api_key:
+ *         type: String    
+ *       steam_id:
+ *         type: String
+ *       consumer_key:
+ *         type: String
+ *       consumer_secret:
+ *         type: String
+ *       access_token_key:
+ *         type: String
+ *       access_token_secret:
+ *         type: String
+ */

@@ -7,6 +7,7 @@
     "express": "4.x",
     "body-parser": "*",
     "jsonwebtoken": "*",
+    "swagger-express":"*",
     "mysql": "*"
   },
   "author": "VIVION Nicolas",
