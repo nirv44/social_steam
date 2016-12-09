@@ -38,7 +38,6 @@ app.use(swagger.init(app, {
 
 
 
-
 app.get('/user', bdd.findByEmailPassUser);
 app.post('/user', bdd.addUser);
 app.put('/user/:iduser', bdd.updateUser);

@@ -1,10 +1,9 @@
-
-
 /**
  * @swagger
  * resourcePath: /
  * description: service utilsateur
  */
+ "use strict";
 var mysql      = require('mysql');
 
 var	secure = require('./security');
@@ -21,7 +20,7 @@ connection.connect(function(err) {
   console.log("Il faut penser a démarer et créer la base de donnée");
   console.log("________");
   console.log("table : user");
-  console.log("id: int,  email: String,  password: String, steam_api_key: String, steam_id: String, iduser: int, consumer_key: String,consumer_secret: String, access_token_key: String, access_token_secret: String")
+  console.log("id: int,  email: String,  password: String, steam_api_key: String, steam_id: String, consumer_key: String,consumer_secret: String, access_token_key: String, access_token_secret: String")
 });
 
 

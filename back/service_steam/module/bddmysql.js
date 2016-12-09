@@ -18,7 +18,7 @@ connection.connect(function(err) {
 
 
 exports.chercheKeyAndId = function(iduser){
-	connection.query('SELECT * FROM user WHERE iduser = ?', iduser, function(err, results) {
+	connection.query('SELECT * FROM user WHERE id = ?', iduser, function(err, results) {
 		if (err){
 			return null;
 		}
