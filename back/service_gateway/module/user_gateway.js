@@ -193,6 +193,7 @@ exports.Connexion = function(req, res) {
  *          dataType: String
  */
 exports.Inscription = function(req, res) {
+
 	// add service user
 	security.contacterServiceForToken(hostUser, function(token){
 		if (token != null){
@@ -272,11 +273,6 @@ exports.Inscription = function(req, res) {
  *          required: true
  *          dataType: int
  *        - name: steam_id
- *          description: Identifiant de l'utilisateur (headers.data)
- *          paramType: headers
- *          required: true
- *          dataType: int
- *        - name: iduser
  *          description: Identifiant de l'utilisateur (headers.data)
  *          paramType: headers
  *          required: true
