@@ -1,3 +1,8 @@
+/**
+ * @swagger
+ * resourcePath: /
+ * description: service Steam
+ */
 "use strict";
 var steam = require('steam-web');
 
@@ -7,7 +12,7 @@ var secure = require('./security');
 
 
 // Prepare les infos du compte Steam
-prepareClientSteam = function(iduser){
+exports.prepareClientSteam = function(iduser){
 	
 	var saller = null;
 	var letout = bdd.chercheKeyAndId(iduser);
@@ -23,7 +28,34 @@ prepareClientSteam = function(iduser){
 	return s;
 }
 
-
+/**
+ * @swagger
+ * path: /steam/{iduser}
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Récupération des informations Steam de l'utilisateur
+ *      notes: Retourne les informations steam de l'utilisateur
+ *      responseClass: Profile
+ *      nickname: SteamProfile
+ *      consumes: 
+ *        - text/html
+ *      parameters:
+ *        - name: iduser
+ *          description: Identifiant de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: int
+ *        - name: steamids
+ *          description: Identifiant de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: string
+ *        - name: format
+ *          description: Identifiant de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: string
+ */
 exports.getInformationSteamByUser = function(req, res) {
 	var recupe = secure.verifytoken(req);
 	if(recupe != false){
@@ -55,8 +87,52 @@ exports.getInformationSteamByUser = function(req, res) {
 	}
 }
 
-
-
-
-
-
+/**
+ * @swagger
+ * models:
+ *   Profile:
+ *     id: Profile
+ *     properties:
+ *       steamid:
+ *         type: String
+ *       personaname:
+ *         type: String
+ *       profileurl:
+ *         type: String    
+ *       avatar:
+ *         type: String
+ *       avatarmedium:
+ *         type: String
+ *       avatarfull:
+ *         type: String
+ *       personastate:
+ *         type: String
+ *       communityvisibilitystate:
+ *         type: String
+ *       profilestate:
+ *         type: String
+ *       lastlogoff:
+ *         type: String
+ *       commentpermission:
+ *         type: String
+ *       realname:
+ *         type: String
+ *       primaryclanid:
+ *         type: String
+ *       timecreated:
+ *         type: String
+ *       gameid:
+ *         type: String
+ *       gameserverip:
+ *         type: String
+ *       gameextrainfo:
+ *         type: String
+ *       cityid:
+ *         type: String
+ *       loccountrycode:
+ *         type: String
+ *       locstatecode:
+ *         type: String
+ *       loccityid:
+ *         type: String
+ */

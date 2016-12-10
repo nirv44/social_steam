@@ -1,3 +1,8 @@
+/**
+ * @swagger
+ * resourcePath: /
+ * description: service Twitter
+ */
 "use strict";
 var mysql      = require('mysql');
 
@@ -21,7 +26,34 @@ connection.connect(function(err) {
  });
 
 
-
+/**
+ * @swagger
+ * path: /user
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: Connexion avec un mail et mot de passe
+ *      notes: Retourne un utilisateur liée a l'email / mot de passe
+ *      responseClass: User
+ *      nickname: login
+ *      consumes: 
+ *        - text/html
+ *      parameters:
+ *        - name: email
+ *          description: Votre mail (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: string
+ *        - name: password
+ *          description: Votre mot de passe (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: string
+ *        - name: token
+ *          description: le token qui doit etre generer par /logs (headers.token)
+ *          paramType: headers
+ *          required: true
+ *          dataType: string
+ */
 exports.cherchetoken = function(iduser){
 	connection.query('SELECT * FROM user WHERE id = ?', iduser, function(err, results) {
 		if (err){

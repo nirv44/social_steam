@@ -1,0 +1,63 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: Service User
+host: localhost:3000
+basePath: /
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /user:
+    get:
+      description: Récupère l''utilisateur connecté à l''aide de l''email
+      responses:
+        "200":
+          description: Succes
+          schema:
+            $ref: "#/definitions/GetUserSuccesResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/GetUserErrorResponse"
+  /users:
+    post:
+      description: Ajoute l''utilisateur à la base de données
+      responses:
+        "200":
+          description: Succes
+          schema:
+            $ref: "#/definitions/PostUserSuccesResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/PostUserErrorResponse"
+            
+definitions:
+  GetUserSuccesResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  GetUserErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  PostUserSuccesResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  PostUserErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string

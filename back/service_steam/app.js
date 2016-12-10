@@ -31,7 +31,7 @@ app.use(swagger.init(app, {
     basePath: 'http://localhost:3003',
     swaggerURL: '/swagger',
     swaggerUI: './public/swagger/',
-    apis: ['./module/bddmysql.js','./module/security.js']
+    apis: ['./module/gestionSteam.js','./module/security.js']
 }));
 
 

@@ -1,3 +1,8 @@
+/**
+ * @swagger
+ * resourcePath: /
+ * description: service Steam
+ */
 "use strict";
 
 var restclient 		= require('node-rest-client').Client;
@@ -16,6 +21,30 @@ var secretGateway 	= gestion.recuperationInfos().secretGateway;
 // Vérifie si un user existe par son email et mdp
 // entré : email: String / password: String
 // Sortie : un token
+/**
+ * @swagger
+ * path: /connexion
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Connexion de l'utilisateur
+ *      notes:  Connexion de l'utilisateur
+ *      responseClass: Profile
+ *      nickname: SteamProfile
+ *      consumes: 
+ *        - text/html
+ *      parameters:
+ *        - name: email
+ *          description: Email de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: String
+ * 		parameters:
+ *        - name: password
+ *          description: Mot de passe de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: String
+ */
 exports.Connexion = function(req, res) {
 	// TOKEN du 'service User'
 	security.contacterServiceForToken(hostUser, function(token){
@@ -116,6 +145,53 @@ exports.Connexion = function(req, res) {
 // ajoute un User
 // entré : Un User
 // sortie : /
+/**
+ * @swagger
+ * path: /inscription
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Enregistrement de l'utilisateur en base
+ *      notes: Enregistrement de l'utilisateur en base
+ *      responseClass: Profile
+ *      nickname: SteamProfile
+ *      consumes: 
+ *        - text/html
+ *      parameters:
+ *        - name: email
+ *          description: (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: String
+ *        - name: password
+ *          description: Mot de passe de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: String
+ *        - name: steam_api_key
+ *          description: clé de l'api steam (headers.data)
+ *          paramType: headers
+ *          dataType: String
+ *        - name: steam_id
+ *          description: Identifiant steam de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          dataType: String
+ *        - name: consumer_key
+ *          description: clé de Consumer (headers.data)
+ *          paramType: headers
+ *          dataType: String
+ *        - name: consumer_secret
+ *          description: Consumer (headers.data)
+ *          paramType: headers
+ *          dataType: String
+ *        - name: access_token_key
+ *          description: toker d'accès a steam (headers.data)
+ *          paramType: headers
+ *          dataType: String
+ *        - name: access_token_secret
+ *          description: toker d'accès a steam (headers.data)
+ *          paramType: headers
+ *          dataType: String
+ */
 exports.Inscription = function(req, res) {
 	// add service user
 	security.contacterServiceForToken(hostUser, function(token){
@@ -163,7 +239,69 @@ exports.Inscription = function(req, res) {
 //	consumer_secret: String,
 //	access_token_key: String,
 //	access_token_secret: String
-
+/**
+ * @swagger
+ * path: /user/:iduser
+ * operations:
+ *   -  httpMethod: PUT
+ *      summary: Modification des informations de l'utilisateur
+ *      notes: Modification des informations de l'utilisateur
+ *      responseClass: Profile
+ *      nickname: SteamProfile
+ *      consumes: 
+ *        - text/html
+ *      parameters:
+ *        - name: email
+ *          description: Identifiant de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: int
+ *        - name: password
+ *          description: Identifiant de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: int
+ *        - name: iduser
+ *          description: Identifiant de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: int
+ *        - name: steam_api_key
+ *          description: Identifiant de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: int
+ *        - name: steam_id
+ *          description: Identifiant de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: int
+ *        - name: iduser
+ *          description: Identifiant de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: int
+ *        - name: consumer_key
+ *          description: Identifiant de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: int
+ *        - name: consumer_secret
+ *          description: Identifiant de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: int
+ *        - name: access_token_key
+ *          description: Identifiant de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: int
+ *        - name: access_token_secret
+ *          description: Identifiant de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: int
+ */
 exports.modifierCompte = function(req, res) {
 	var retour = securityClient.verifytoken(req);
 
@@ -212,31 +350,6 @@ var parseUser = function(req){
 		"access_token_secret": req.body.access_token_secret
 	});
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 exports.checkifplaying = function(req, res){
     var userid = req.body.iduser;

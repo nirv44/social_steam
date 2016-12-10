@@ -1,3 +1,8 @@
+/**
+ * @swagger
+ * resourcePath: /security
+ * description: service utilsateur
+ */
 "use strict";
 //___________________________________________________
 //___________________________________________________
@@ -22,6 +27,29 @@ var mdp 			= gestion.recuperationInfos().mdp;
 // Si oui alors on renvoi un token
 // Entré : Identifiant
 // Sortie : Token liée
+/**
+ * @swagger
+ * path: /logs
+ * operations:
+ *   -  httpMethod: GET
+ *      summary: generer token
+ *      notes: Retourne un token 
+ *      responseClass: token
+ *      nickname: token
+ *      consumes: 
+ *        - text/html
+ *      parameters:
+ *        - name: login
+ *          description: Votre login (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: string
+ *        - name: password
+ *          description: Votre mot de passe (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: string
+ */
 exports.securityToken = function(req, res) {
 	var recupe = "";
 
@@ -61,3 +89,13 @@ exports.verifytoken = function(req) {
 	}
 	return false;
 }
+
+/**
+ * @swagger
+ * models:
+ *   token:
+ *     id: token
+ *     properties:
+ *       token:
+ *         type: String
+ */
