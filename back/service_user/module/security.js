@@ -40,8 +40,7 @@ exports.securityToken = function(req, res) {
 	var recupe = "";
 
 	try{
-		JSON.parse(req.headers.data);
-
+		recupe = JSON.parse(req.headers.data);
 		if(recupe.login == login && recupe.mdp == mdp){
 			var token = jwt.sign(recupe, secretGateway, {
 				expiresIn: 86400 // expires in 24 hours

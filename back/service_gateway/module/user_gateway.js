@@ -193,6 +193,7 @@ exports.Connexion = function(req, res) {
  *          dataType: String
  */
 exports.Inscription = function(req, res) {
+
 	// add service user
 	security.contacterServiceForToken(hostUser, function(token){
 		if (token != null){
