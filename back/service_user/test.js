@@ -1,7 +1,13 @@
 var supertest = require("supertest");
 var should = require("should");
 
-// This agent refers to PORT where program is running.
+
+
+////////////////////// DOC ////////////////
+// https://www.npmjs.com/package/supertest
+
+
+
 
 var server = supertest.agent("http://localhost:3001");
 
