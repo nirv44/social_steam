@@ -23,10 +23,8 @@ exports.contacterServiceForToken = function(host, res) {
     			"data": datas
     	 	}
     }
-
 	
 	client.get(host +"/logs", arg, function(data, response) {
-		console.log("data token "+ data.token);
 		res(data.token);
 	}).on('error', function(error) {
 		if(error.code === "ECONNREFUSED"){

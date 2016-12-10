@@ -19,7 +19,7 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
 	if(err){
 		console.log("Il faut penser a démarer et créer la base de donnée");
-		console.log("________");
+		console.log("bdd : social_steam_db");
 		console.log("table : user");
 		console.log("id: int,  email: String,  password: String, steam_api_key: String, steam_id: String, consumer_key: String,consumer_secret: String, access_token_key: String, access_token_secret: String");
 	}
