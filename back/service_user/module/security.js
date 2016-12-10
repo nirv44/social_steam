@@ -60,7 +60,9 @@ exports.securityToken = function(req, res) {
 
 
 exports.verifytoken = function(req) {
+	console.log(req.headers);
 	var token = req.headers['token'];
+	
 	if(token) {
 		var decode = jwt.verify(token, secretGateway);
 		if(decode.login == login && decode.mdp == mdp){
