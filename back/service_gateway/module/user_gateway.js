@@ -28,8 +28,8 @@ var secretGateway 	= gestion.recuperationInfos().secretGateway;
  *   -  httpMethod: POST
  *      summary: Connexion de l'utilisateur
  *      notes:  Connexion de l'utilisateur
- *      responseClass: Profile
- *      nickname: SteamProfile
+ *      responseClass: Response
+ *      nickname: Response
  *      consumes: 
  *        - text/html
  *      parameters:
@@ -152,13 +152,13 @@ exports.Connexion = function(req, res) {
  *   -  httpMethod: POST
  *      summary: Enregistrement de l'utilisateur en base
  *      notes: Enregistrement de l'utilisateur en base
- *      responseClass: Profile
- *      nickname: SteamProfile
+ *      responseClass: Response
+ *      nickname: Response
  *      consumes: 
  *        - text/html
  *      parameters:
  *        - name: email
- *          description: (headers.data)
+ *          description: Email de l'utilisateur (headers.data)
  *          paramType: headers
  *          required: true
  *          dataType: String
@@ -230,12 +230,10 @@ exports.Inscription = function(req, res) {
 //  password: String
 
 //  Steam
-//  iduser: Number,
 //  steam_api_key: String,
 //	steam_id: String
 
 //  Twitter
-//  iduser: Number,
 //  consumer_key: String,
 //	consumer_secret: String,
 //	access_token_key: String,
@@ -247,56 +245,61 @@ exports.Inscription = function(req, res) {
  *   -  httpMethod: PUT
  *      summary: Modification des informations de l'utilisateur
  *      notes: Modification des informations de l'utilisateur
- *      responseClass: Profile
- *      nickname: SteamProfile
+ *      responseClass: Response
+ *      nickname: Response
  *      consumes: 
  *        - text/html
  *      parameters:
  *        - name: email
- *          description: Identifiant de l'utilisateur (headers.data)
+ *          description: Email de l'utilisateur (headers.data)
  *          paramType: headers
  *          required: true
- *          dataType: int
+ *          dataType: String
  *        - name: password
- *          description: Identifiant de l'utilisateur (headers.data)
+ *          description: Mot de passe de l'utilisateur (headers.data)
  *          paramType: headers
  *          required: true
- *          dataType: int
+ *          dataType: String
  *        - name: iduser
  *          description: Identifiant de l'utilisateur (headers.data)
  *          paramType: headers
  *          required: true
- *          dataType: int
+ *          dataType: String
  *        - name: steam_api_key
- *          description: Identifiant de l'utilisateur (headers.data)
+ *          description: Clé d'accès à l'API Steam (headers.data)
  *          paramType: headers
  *          required: true
- *          dataType: int
+ *          dataType: String
  *        - name: steam_id
+ *          description: Identifiant Steam de l'utilisateur (headers.data)
+ *          paramType: headers
+ *          required: true
+ *          dataType: String
+ *        - name: iduser
  *          description: Identifiant de l'utilisateur (headers.data)
  *          paramType: headers
  *          required: true
- *          dataType: int
+ *          dataType: String
  *        - name: consumer_key
  *          description: Identifiant de l'utilisateur (headers.data)
  *          paramType: headers
  *          required: true
- *          dataType: int
+ *          dataType: String
  *        - name: consumer_secret
  *          description: Identifiant de l'utilisateur (headers.data)
  *          paramType: headers
  *          required: true
- *          dataType: int
+ *          dataType: String
  *        - name: access_token_key
  *          description: Identifiant de l'utilisateur (headers.data)
  *          paramType: headers
  *          required: true
- *          dataType: int
+ *          dataType: String
  *        - name: access_token_secret
  *          description: Identifiant de l'utilisateur (headers.data)
  *          paramType: headers
  *          required: true
- *          dataType: int
+ *          dataType: String
  */
 exports.modifierCompte = function(req, res) {
 	var retour = securityClient.verifytoken(req);
@@ -397,3 +400,13 @@ exports.checkifplaying = function(req, res){
     });
 
 }
+
+/**
+ * @swagger
+ * models:
+ *   Response:
+ *     id: Response
+ *     properties:
+ *       response:
+ *         type: boolean
+ */
