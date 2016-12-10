@@ -15,7 +15,6 @@ exports.contacterServiceForToken = function(host, res) {
       login: gestion.recuperationInfos().login,
       mdp: gestion.recuperationInfos().mdp
     });
-	console.log(datas);
 
     var arg = {
     	headers: 
@@ -27,7 +26,6 @@ exports.contacterServiceForToken = function(host, res) {
 
 	
 	client.get(host +"/logs", arg, function(data, response) {
-		console.log(data);
 		res(data.token);
 	}).on('error', function(error) {
 		if(error.code === "ECONNREFUSED"){
