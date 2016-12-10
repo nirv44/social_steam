@@ -15,7 +15,8 @@ exports.recuperationInfos = function(){
 // gestion des erreur ici
 exports.gestionErreur= function(req){
     nbErreur = nbErreur + 1;
-    if(req.error.code === "ECONNREFUSED"){
+    console.log("reqcode " + req.code);
+    if(req.code === "ECONNREFUSED"){
         console.log("Service "+ donns[0] +" down");
     }else{
         console.log("Erreur avec le service");
