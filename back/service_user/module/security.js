@@ -11,7 +11,6 @@ var login 			= gestion.recuperationInfos().login;
 var mdp 			= gestion.recuperationInfos().mdp;
 
 
-
 /**
  * @swagger
  * path: /logs
