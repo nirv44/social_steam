@@ -4,11 +4,7 @@ var child_process = require('child_process');
 
 var nbErreur = 0;
 
-/*
-gestion.recuperationInfos(function(retour){
-    console.log(retour);
-});
-*/
+
 exports.recuperationInfos = function(){
     var jsonRetour = fs.readFileSync("./infos/infos.json","UTF8");
     return JSON.parse(jsonRetour);
@@ -19,7 +15,7 @@ exports.recuperationInfos = function(){
 // gestion des erreur ici
 exports.gestionErreur= function(req){
     nbErreur = nbErreur + 1;
-    if(error.code === "ECONNREFUSED"){
+    if(req.error.code === "ECONNREFUSED"){
         console.log("Service "+ donns[0] +" down");
     }else{
         console.log("Erreur avec le service");
