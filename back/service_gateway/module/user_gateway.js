@@ -216,8 +216,6 @@ exports.Inscription = function(req, res) {
 				gestion.gestionErreur(error);
 				res.json({success : false});
 			});	
-		}else{
-			res.json({success : false});
 		}
 	});
 }
