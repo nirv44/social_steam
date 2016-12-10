@@ -11,7 +11,7 @@ var secure = require('./security');
 
 
 
-prepareClientTwitter = function(iduser){
+var prepareClientTwitter = function(iduser){
 	
 	var client = null;
 	var letout = bdd.cherchetoken(iduser);
