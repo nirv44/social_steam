@@ -8,6 +8,7 @@ var	bdd = require('./module/bddmysql');
 var	secure = require('./module/security');
 
 var app = express();
+var port = process.env.PORT || 3001;
 
 
 app.use(bodyParser.json());
@@ -30,7 +31,7 @@ app.options('/api/*', function (request, response, next) {
 app.use(swagger.init(app, {
     apiVersion: '1.0',
     swaggerVersion: '1.0',
-    basePath: 'http://localhost:3001',
+    basePath: 'http://localhost:' + port,
     swaggerURL: '/swagger',
     swaggerUI: './public/swagger/',
     apis: ['./module/bddmysql.js','./module/security.js']
@@ -45,6 +46,6 @@ app.get('/users', bdd.findallUser);
 app.get('/logs', secure.securityToken);
 
 
-app.listen(3001);
-console.log('SERVICE USER - Listening on port 3001...');
+app.listen(port);
+console.log('SERVICE USER - Listening on port ' + port + '...');
 console.log('SERVICE USER - DOC : /swagger');

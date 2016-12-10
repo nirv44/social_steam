@@ -9,6 +9,7 @@ var	secure = require('./module/security');
 
 
 var app = express();
+var port = process.env.PORT || 3002;
 
 
 app.use(bodyParser.json());
@@ -29,7 +30,7 @@ app.options('/api/*', function (request, response, next) {
 app.use(swagger.init(app, {
     apiVersion: '1.0',
     swaggerVersion: '1.0',
-    basePath: 'http://localhost:3002',
+    basePath: 'http://localhost:' + port,
     swaggerURL: '/swagger',
     swaggerUI: './public/swagger/',
     apis: ['./module/gestionTwitter.js']
@@ -39,6 +40,6 @@ app.post('/sendtweet', twitter.sendPLayingInTwiter);
 app.get('/logs', secure.securityToken);
 
 
-app.listen(3002);
-console.log('SERVICE TWITER - Listening on port 3002...');
+app.listen(port);
+console.log('SERVICE TWITER - Listening on port '+ port ¨+ '...');
 console.log('SERVICE TWITTER - DOC : /swagger');

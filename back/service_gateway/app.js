@@ -6,6 +6,7 @@ var swagger = require('swagger-express');
 var	user = require('./module/user_gateway');
 
 var app = express();
+var port = process.env.PORT || 3000;
 
 
 app.use(bodyParser.json());
@@ -34,13 +35,13 @@ app.put('/user/:iduser', user.modifierCompte);
 app.use(swagger.init(app, {
     apiVersion: '1.0',
     swaggerVersion: '1.0',
-    basePath: 'http://localhost:3000',
+    basePath: 'http://localhost:' + port,
     swaggerURL: '/swagger',
     swaggerUI: './public/swagger/',
     apis: ['./module/user_gateway.js']
 }));
 
 
-app.listen(3000);
-console.log('SERVICE GATEWAY - Listening on port 3000...');
+app.listen(port);
+console.log('SERVICE GATEWAY - Listening on port ' + port + '...');
 console.log('SERVICE GATEWAY - DOC : /swagger');
