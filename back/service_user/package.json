@@ -11,5 +11,8 @@
     "mysql": "*"
   },
   "author": "VIVION Nicolas",
-  "license": "VIVION Corp."
+  "license": "VIVION Corp.", 
+  "scripts": { 
+	"start" : "node app.js"
+  }
 }
