@@ -213,6 +213,7 @@ exports.Inscription = function(req, res) {
 					success: true
 				});
 			}).on('error', function(error) {
+				console.log(error);
 				gestion.gestionErreur(error);
 				res.json({success : false});
 			});	

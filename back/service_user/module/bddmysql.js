@@ -3,8 +3,8 @@
  * resourcePath: /
  * description: service utilsateur
  */
- "use strict";
-var mysql      = require('mysql');
+"use strict";
+var mysql = require('mysql');
 
 var	secure = require('./security');
 
@@ -15,7 +15,7 @@ var connection = mysql.createConnection({
   password : '',
   database : 'social_steam_db'
 });
- 
+
 connection.connect(function(err) {
 	if(err){
 		console.log("Il faut penser a démarer et créer la base de donnée");
