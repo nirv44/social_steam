@@ -8,7 +8,10 @@
     "body-parser": "*",
     "jsonwebtoken": "*",
     "swagger-express":"*",
-    "mysql": "*"
+    "mysql": "*",
+    "mocha":"*",
+    "supertest":"*",
+    "should":"*"
   },
   "author": "VIVION Nicolas",
   "license": "VIVION Corp.", 

@@ -58,10 +58,24 @@ connection.connect(function(err) {
 exports.findByEmailPassUser = function(req, res) {
 	var recup = secure.verifytoken(req);
 	if(recup != false){
-		connection.query('SELECT * FROM user WHERE email = ? and password = ?', [JSON.parse(req.headers.data).email, JSON.parse(req.headers.data).password], function(err, results) {
-		if (err) throw err;
-			res.json(results[0]);
-		});
+		try{
+			if(JSON.parse(req.headers.data).email != null || JSON.parse(req.headers.data).email != ""){
+				if(JSON.parse(req.headers.data).password != null || JSON.parse(req.headers.data).password != ""){
+
+					connection.query('SELECT * FROM user WHERE email = ? and password = ?', [JSON.parse(req.headers.data).email, JSON.parse(req.headers.data).password], function(err, results) {
+						if (err) throw err;
+						res.json(results[0]);
+					});
+
+				}else{
+					res.json({success: false});
+				}
+			}else{
+				res.json({success: false});
+			}
+		}catch(e){
+			res.json({success: false});
+		}
 	}else{
 		res.json({success: false});
 	}
@@ -69,36 +83,6 @@ exports.findByEmailPassUser = function(req, res) {
 
 
 
-
-/**
- * @swagger
- * path: /users
- * operations:
- *   -  httpMethod: GET
- *      summary: lit tous les utilisateurs en base
- *      notes: Retourne tous les utilisateurs
- *      responseClass: User
- *      nickname: Lire tous les utilisateurs
- *      consumes: 
- *        - text/html
- *      parameters:
- *        - name: token
- *          description: le token qui doit etre generer par /logs (headers.token)
- *          paramType: headers
- *          required: true
- *          dataType: string
- */
-exports.findallUser = function(req, res) {
-	var recup = secure.verifytoken(req);
-	if(recup != false){
-		connection.query('SELECT * FROM user', function(err, results){
-			if(err) throw err;
-			res.json(results);
-		});
-	}else{
-		res.json({success: false});
-	}
-}
 
 
 /**
@@ -162,10 +146,24 @@ exports.findallUser = function(req, res) {
 exports.addUser = function(req, res) {	
 	var recup = secure.verifytoken(req);
 	if(recup != false){
-		connection.query('INSERT INTO user SET ?', JSON.parse(req.headers.data), function(err, result) {
-			if (err) throw err;
-			res.json({success: true});
-		});
+		try{
+			if(JSON.parse(req.headers.data).email != null || JSON.parse(req.headers.data).email != ""){
+				if(JSON.parse(req.headers.data).password != null || JSON.parse(req.headers.data).password != ""){
+
+					connection.query('INSERT INTO user SET ?', JSON.parse(req.headers.data), function(err, result) {
+						if (err) throw err;
+						res.json({success: true});
+					});
+					
+				}else{
+					res.json({success: false});
+				}
+			}else{
+				res.json({success: false});
+			}
+		}catch(e){
+			res.json({success: false});
+		}
 	}else{
 		res.json({success: false});
 	}
@@ -237,9 +235,12 @@ exports.addUser = function(req, res) {
  *          dataType: string
  */
 exports.updateUser = function(req, res) {
+	console.log("yo");
 	var recup = secure.verifytoken(req);
 		if(recup != false){
-		connection.query('UPDATE user SET ? WHERE id = ?', [JSON.parse(req.headers.data),req.params.iduser], function(err, result) {
+			console.log(req.headers);
+			console.log(req.params);
+		connection.query('UPDATE user SET ? WHERE id = ?', [JSON.parse(req.headers.data),req.params.id], function(err, result) {
 		  if (err) throw err;
 		  res.json(result);
 		});

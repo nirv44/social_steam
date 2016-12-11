@@ -9,6 +9,7 @@
 var jwt 			= require('jsonwebtoken');
 var gestion 		= require('./gestion_gateway');
 
+
 var secretGateway 	= gestion.recuperationInfos().secretGateway;
 
 
@@ -20,9 +21,40 @@ exports.verifytoken = function(req) {
 
 	if(token) {
 		var decode = jwt.verify(token, secretGateway);
-		if(decode.login == login && decode.mdp == modp){
-			return req;
-		}
+		security.contacterServiceForToken(hostUser, function(token){
+			if(token != null){
+				var client = new restclient();
+
+				var datas = JSON.stringify({
+			      email: decode.email,
+			      password: decode.password
+			    });
+			    var arg = {
+			    	headers:
+			    		{ 
+			    			"Content-Type": "application/json",
+			    			"data": datas,
+			    			"token": donns[2]
+			    	 	}
+			    }
+													
+				client.get(donns[0] +"/user", arg, function(data, respo) {
+					if(data != null){
+						if(data.email == decode.email && data.password == decode.password){
+							return req;
+						}else{
+							return false;
+						}
+					}else{
+						return false;
+					}
+				}).on('error', function(error) {
+					gestion.gestionErreur(error);
+					return false;
+				});
+
+			}
+		});
 	}
 	
 	return false;

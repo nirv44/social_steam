@@ -57,8 +57,6 @@ var prepareClientTwitter = function(iduser){
 exports.sendPLayingInTwiter = function (req, res) {
 	var recupe = secure.verifytoken(req);
 	if(recupe != false){
-
-
 		var client = prepareClientTwitter(req.body.iduser);
 		if(client != null){
 			client.post('statuses/update', {status: req.body.tweet}, function(error, tweet, response){

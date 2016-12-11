@@ -11,7 +11,10 @@
     "jsonwebtoken": "*",
     "mysql": "*",
     "swagger-express":"*",
-    "steam-web": "*"
+    "steam-web": "*",
+    "mocha":"*",
+    "supertest":"*",
+    "should":"*"
   },
   "author": "VIVION Nicolas",
   "license": "VIVION Corp.", 

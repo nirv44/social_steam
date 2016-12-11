@@ -26,10 +26,10 @@ app.options('/api/*', function (request, response, next) {
 });
 
 
-
 app.post('/inscription', user.Inscription);
 app.post('/connexion', user.Connexion);
 app.put('/user/:iduser', user.modifierCompte);
+app.post('/roll', user.checkifplaying);
 
 
 app.use(swagger.init(app, {

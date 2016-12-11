@@ -41,5 +41,5 @@ app.get('/logs', secure.securityToken);
 
 
 app.listen(port);
-console.log('SERVICE TWITER - Listening on port '+ port ¨+ '...');
+console.log('SERVICE TWITTER - Listening on port '+ port + '...');
 console.log('SERVICE TWITTER - DOC : /swagger');

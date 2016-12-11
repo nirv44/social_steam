@@ -37,7 +37,6 @@ var mdp 			= gestion.recuperationInfos().mdp;
 exports.securityToken = function(req, res) {
 
 	var recupe = "";
-
 	try{
 		recupe = JSON.parse(req.headers.data);
 		if(recupe.login == login && recupe.mdp == mdp){
@@ -60,7 +59,6 @@ exports.securityToken = function(req, res) {
 
 
 exports.verifytoken = function(req) {
-	console.log(req.headers);
 	var token = req.headers['token'];
 	
 	if(token) {

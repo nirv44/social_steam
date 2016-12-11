@@ -9,7 +9,10 @@
     "jsonwebtoken": "*",
     "swagger-express":"*",
     "mysql": "*",
-    "twitter":"*"
+    "twitter":"*",
+    "mocha":"*",
+    "supertest":"*",
+    "should":"*"
   },
   "author": "VIVION Nicolas",
   "license": "VIVION Corp.", 

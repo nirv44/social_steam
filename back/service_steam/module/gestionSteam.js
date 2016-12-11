@@ -12,7 +12,7 @@ var secure = require('./security');
 
 
 // Prepare les infos du compte Steam
-exports.prepareClientSteam = function(iduser){
+var prepareClientSteam = function(iduser){
 	
 	var saller = null;
 	var letout = bdd.chercheKeyAndId(iduser);
@@ -25,7 +25,7 @@ exports.prepareClientSteam = function(iduser){
 		saller[1] = letout.steam_id;
 	}
 
-	return s;
+	return saller;
 }
 
 /**
@@ -61,13 +61,14 @@ exports.getInformationSteamByUser = function(req, res) {
 	if(recupe != false){
 
 		var sretour = prepareClientSteam(req.params.iduser);
-		var s = sretour[0];
-		var steamids = sretour[1];
+		
 
 
 		if(s != null){
 			if (steamids != null) {
-
+				var s = sretour[0];
+				var steamids = sretour[1];
+				
 				s.getPlayerSummaries({
 					steamids: [steamids],
 					callback: function(err, data) {

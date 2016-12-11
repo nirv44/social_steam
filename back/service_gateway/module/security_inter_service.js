@@ -15,7 +15,7 @@ exports.contacterServiceForToken = function(host, res) {
       login: gestion.recuperationInfos().login,
       mdp: gestion.recuperationInfos().mdp
     });
-
+    
     var arg = {
     	headers: 
     		{ 
