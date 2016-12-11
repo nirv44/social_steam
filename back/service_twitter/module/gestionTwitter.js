@@ -37,7 +37,7 @@ var prepareClientTwitter = function(iduser){
  * path: /sendtweet
  * operations:
  *   -  httpMethod: POST
- *      summary: Envoi un twee
+ *      summary: Envoi un tweet
  *      notes: Envoi un tweet sur le compte concerné
  *      nickname: tweet
  *      consumes: 
