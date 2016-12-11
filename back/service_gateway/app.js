@@ -21,7 +21,7 @@ app.use(function(req, res, next) {
 
 
 app.options('/api/*', function (request, response, next) {
-    response.header("Access-Control-Allow-Methods", "GET, POST");
+    response.header("Access-Control-Allow-Methods", "GET, POST", "PUT");
     response.send();
 });
 

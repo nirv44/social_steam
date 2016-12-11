@@ -342,9 +342,9 @@ var parseUser = function(req){
  */
 exports.checkifplaying = function(req, res){
 
-	//var retour = securityClient.verifytoken(req);
+	var retour = securityClient.verifytoken(req);
 
-	//if(retour != false){
+	if(retour != false){
 
 		security.contacterServiceForToken(hostUser, function(token){
 	    	var userid = req.body.iduser;
@@ -385,7 +385,7 @@ exports.checkifplaying = function(req, res){
 			                            
 			                        }).on('error', function(error) {
 										gestion.gestionErreur(error);
-										//res.json({success : false});
+										res.json({success : false});
 									});	
 			                    });
 
@@ -400,5 +400,5 @@ exports.checkifplaying = function(req, res){
 		    });
 
 		});
-	//}
+	}
 }
