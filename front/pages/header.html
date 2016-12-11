@@ -1,0 +1,36 @@
+<header class="main-header">
+  <!-- Toggle menu button -->
+  <a class="hand-cursor sidebar-toggle" data-toggle="offcanvas" role="button"></a>
+
+  <!-- Header -->
+  <nav class="navbar navbar-static-top" role="navigation">
+    <div class="navbar-nav navbar-nav-header">
+      <img class="pull-left" src="dist/img/favicon.png" width="48" height="48"/>
+      <span><b>S</b>ocial <b>S</b>team</span>
+    </div>
+
+    <!-- Notiications button and panel -->
+    <div class="navbar-custom-menu">
+      <ul class="nav navbar-nav">
+        <li class="dropdown notifications-menu">
+
+          <!-- Notiications button -->
+          <a class="hand-cursor dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-bell-o"></i>
+            <!-- Notiications count -->
+            <span class="label label-default">4</span>
+          </a>
+
+          <!-- Notiications panel -->
+          <ul class="dropdown-menu menu">
+            <li>
+              <ul class="menu">
+                <li ng-repeat="notification in notifications"><a class="hand-cursor"><i class="fa {{notification.class}}"></i> {{notification.text}}</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

@@ -2,7 +2,7 @@ angular.module('app.controllers')
 .controller('LoginController', function($scope, $location, services) {
   
   $scope.user = {
-    login: '', 
+    email: '', 
     password: ''
   };
   

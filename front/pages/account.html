@@ -1,0 +1,22 @@
+<!-- Main header -->
+<ng-include src="'pages/header.html'"></ng-include>
+
+<!-- Left sidebar menu -->
+<ng-include src="'pages/menu.html'"></ng-include>
+
+<!-- Content Panel -->
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>Mon Steam</h1>
+  </section>
+  
+  <section class="content">
+    <div>
+      <img src="{{user.avatarUrl}}" class="img-circle">
+      <p class="font-20">{{user.steamUsername}}</p>
+    </div>
+  </section>
+</div>
+
+<!-- Footer Panel -->
+<ng-include src="'pages/footer.html'"></ng-include>

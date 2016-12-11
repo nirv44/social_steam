@@ -1,0 +1,89 @@
+<!-- Main header -->
+<header class="main-header">
+  <nav class="navbar navbar-static-top" style="margin-left:0px!important;" role="navigation">
+    <div class="navbar-nav navbar-nav-header">
+      <img class="pull-left" src="dist/img/favicon.png" width="48" height="48"/>
+      <span><b>S</b>ocial <b>S</b>team</span>
+    </div>
+  </nav>
+</header>
+
+<!-- Content Panel -->
+<div class="content-wrapper" style="margin-left:0px!important;">
+  <section class="content-header">
+    <h1>Inscription</h1>
+  </section>
+  
+  <section class="row content">
+    <div class="form-group marg-20 pad-10">
+      <label class="col-xs-3 control-label">Email</label>
+      <div class="col-xs-7">
+        <input type="text" ng-model="subscriber.email">
+      </div>
+    </div>
+    
+    <div class="form-group marg-20 pad-10">
+      <label class="col-xs-3 control-label">Mot de passe</label>
+      <div class="col-xs-7">
+        <input type="password" ng-model="subscriber.password">
+      </div>
+    </div>
+    
+    <div class="form-group marg-20 pad-10">
+      <label class="col-xs-3 control-label">Confirmer mot de passe</label>
+      <div class="col-xs-7">
+        <input type="password" ng-model="subscriber.confirmedPassword">
+      </div>
+    </div>
+    
+    <div class="form-group marg-20 pad-10">
+      <label class="col-xs-3 control-label">Identifiant Steam</label>
+      <div class="col-xs-7">
+        <input type="text" ng-model="subscriber.steam_id">
+      </div>
+    </div>
+    
+    <div class="form-group marg-20 margtop-50 pad-10">
+      <label class="col-xs-10 control-label">Pour utiliser les fonctionnalités Twitter, veuillez renseigner les champs ci-dessous</label>
+    </div>
+    
+    <div class="form-group marg-20 pad-10">
+      <label class="col-xs-3 control-label">Consumer_Key</label>
+      <div class="col-xs-7">
+        <input type="text" ng-model="subscriber.consumer_key">
+      </div>
+    </div>
+    
+    <div class="form-group marg-20 pad-10">
+      <label class="col-xs-3 control-label">Consumer_Secret</label>
+      <div class="col-xs-7">
+        <input type="text" ng-model="subscriber.consumer_secret">
+      </div>
+    </div>
+    
+    <div class="form-group marg-20 pad-10">
+      <label class="col-xs-3 control-label">Access_Token_Key</label>
+      <div class="col-xs-7">
+        <input type="text" ng-model="subscriber.access_token_key">
+      </div>
+    </div>
+    
+    <div class="form-group marg-20 pad-10">
+      <label class="col-xs-3 control-label">Access_Token_Secret</label>
+      <div class="col-xs-7">
+        <input type="text" ng-model="subscriber.access_token_secret">
+      </div>
+    </div>
+    
+    <div class="form-group marg-20 pad-10">
+      <button ng-click="doSubscribe()" class="subscribe-btn">S'inscrire</button>
+      <button ng-click="doCancel()">Annuler</button>
+    </div>
+  </section>
+</div>
+
+<!-- Footer Panel -->
+<footer class="main-footer" style="margin-left:0px!important;">
+  <strong>Copyright &copy; 2016.</strong> All rights reserved.
+  <div class="pull-right hidden-xs">Projet EPSI I4</div>
+</footer>

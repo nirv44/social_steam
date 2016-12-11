@@ -2,12 +2,14 @@ angular.module('app.controllers')
 .controller('SubscribeController', function($scope, $location, services) {
   
   $scope.subscriber = {
-    login: '', 
+    email: '', 
     password: '',
     confirmedPassword: '',
-    firstname: '',
-    lastname: '',
-    mail: ''
+    steam_id: '',
+    consumer_key:'',
+    consumer_secret: '',
+    access_token_key: '',
+    access_token_secret: ''
   };
   
   // Launch user subscription
