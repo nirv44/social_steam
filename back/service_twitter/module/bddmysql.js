@@ -5,10 +5,10 @@ var	secure = require('./security');
 
 
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'social_steam_db'
+  host     : 'bhae1ssel-mysql.services.clever-cloud.com',
+  user     : 'ukadr2ogkkznuk4d',
+  password : 'bhae1ssel',
+  database : 'socialsteamdb'
 });
  
 connection.connect(function(err) {

@@ -1,0 +1,49 @@
+
+__________________________________________________________________________
+_______________________________PREREQUIS__________________________________
+installer node js et npm
+
+Avoir une base mysql (par simplicité prendre wamp qui contient phpmyadmin)
+http://www.wampserver.com/
+Importer le script-bdd-social-steam.sql
+User : root, mdp : ''
+
+
+__________________________________________________________________________
+_______________________________BACK_______________________________________
+Le dossier restserveur contient le service:
+Il est coder avec node js et une connection a mysql pour la bdd.
+Il faut donc les installer afin d'utiliser ce service.
+
+app.js : routage
+Dossier module : les fichier de gestion avec la bdd
+
+
+
+- Chaque service doit être lancer indépendament avec la commande "node app.js"
+- Pour lancer les tests unitaires il faut dans chaque service ouvrir une deusieme invite de commande et lancer la commande "mocha"
+- Pour la doc swagger elle s'atteind depuis un navigateur avec l'adresse:port du service suivis de "/swagger"
+
+
+
+
+___________
+gateway : 
+port : 3000
+
+___________
+user : 
+port : 3001
+
+___________
+twitter :
+port : 3002
+
+___________
+steam :
+port : 3003
+
+___________
+Facebook :
+port : 3004
+
