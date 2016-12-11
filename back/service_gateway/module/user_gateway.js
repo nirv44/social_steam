@@ -341,14 +341,14 @@ var parseUser = function(req){
  * path: /roll
  * operations:
  *   -  httpMethod: POST
- *      summary: check si steam connecter
+ *      summary: Vérifie si l'utilisateur est connecté à Steam
  *      notes:  Vérifie si l'user est connecter a un jeux et envoi un tweet 
  *      nickname: roll
  *      consumes: 
  *        - text/html
  *      parameters:
  *        - name: iduser
- *          description: Email de l'utilisateur (body)
+ *          description: Identifiant de l'utilisateur (body)
  *          paramType: body
  *          required: true
  *          dataType: int
