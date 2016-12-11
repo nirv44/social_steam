@@ -1,8 +1,8 @@
 {
 	"secretGateway" : "fds5fds54fds56fds6seee2e2",
-	"hostUser" : "http://127.0.0.1:3001",
-	"hostTwitter" : "http://127.0.0.1:3002",
-	"hostSteam" : "http://127.0.0.1:3003",
+	"hostUser" : "https://servuser.herokuapp.com/",
+	"hostTwitter" : "https://servicetwitter.herokuapp.com/",
+	"hostSteam" : "https://servicesteam.herokuapp.com/",
 	"login":"nico",
 	"mdp":"jemapellecommentstjames"
 }
