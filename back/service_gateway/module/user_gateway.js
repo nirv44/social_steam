@@ -344,6 +344,23 @@ var parseUser = function(req){
 
 
 
+/**
+ * @swagger
+ * path: /roll
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: check si steam connecter
+ *      notes:  Vérifie si l'user est connecter a un jeux et envoi un tweet 
+ *      nickname: roll
+ *      consumes: 
+ *        - text/html
+ *      parameters:
+ *        - name: iduser
+ *          description: Email de l'utilisateur (body)
+ *          paramType: body
+ *          required: true
+ *          dataType: int
+ */
 exports.checkifplaying = function(req, res){
     var userid = req.body.iduser;
 
