@@ -33,12 +33,12 @@ var secretGateway 	= gestion.recuperationInfos().secretGateway;
  *        - text/html
  *      parameters:
  *        - name: email
- *          description: Email de l'utilisateur (headers.data)
+ *          description: Email de l'utilisateur (body.data)
  *          paramType: headers
  *          required: true
  *          dataType: String
  *        - name: password
- *          description: Mot de passe de l'utilisateur (headers.data)
+ *          description: Mot de passe de l'utilisateur (body.data)
  *          paramType: headers
  *          required: true
  *          dataType: String
@@ -322,6 +322,7 @@ exports.modifierCompte = function(req, res) {
 	}else{
 		res.json({success: false});
 	}
+
 }
 
 
@@ -333,7 +334,7 @@ var parseUser = function(req){
 	return JSON.stringify({
 		"email": req.body.email,
 		"password": req.body.password,
-		"steam_api_key": req.body.steam_api_key,
+		"steam_api_key": "C71880DD82FCB3CF13DF36F09E80CE2A",
 		"steam_id": req.body.steam_id,
 		"consumer_key": req.body.consumer_key,
 		"consumer_secret": req.body.consumer_secret,
@@ -401,7 +402,7 @@ exports.checkifplaying = function(req, res){
 	                            
 	                        }).on('error', function(error) {
 								gestion.gestionErreur(error);
-								res.json({success : false});
+								//res.json({success : false});
 							});	
 	                    });
 
