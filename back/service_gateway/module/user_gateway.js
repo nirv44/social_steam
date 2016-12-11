@@ -354,56 +354,64 @@ var parseUser = function(req){
  *          dataType: int
  */
 exports.checkifplaying = function(req, res){
-    var userid = req.body.iduser;
+
+	var retour = securityClient.verifytoken(req);
+
+	if(retour != false){
+
+		security.contacterServiceForToken(hostUser, function(token){
+	    	var userid = req.body.iduser;
 
 
-    security.contacterServiceForToken(hostSteam, function(token){
-    	if(token != null){
-	        var client = new restclient();
-	        var arg = {
-	            headers: 
-	                {
-	                    "Content-Type": "application/json",
-	                    "token": token
-	                }
-	        };
-	        
-	        // je regarde les infos du user
-	        client.get(hostSteam+"/steam/"+req.params.iduser, arg, function(data, response) {
-	            if(data != null){
-	                // si en réponse j'ai bien un gameid alors jenvoi l'info a tweet/fb
-	                if(data.gameid != null || data.gameid > 0){
-	                    // TWITTER
-	                    security.contacterServiceForToken(hosttwitter, function(tokens) {
+		    security.contacterServiceForToken(hostSteam, function(token){
+		    	if(token != null){
+			        var client = new restclient();
+			        var arg = {
+			            headers: 
+			                {
+			                    "Content-Type": "application/json",
+			                    "token": token
+			                }
+			        };
+			        
+			        // je regarde les infos du user
+			        client.get(hostSteam+"/steam/"+req.params.iduser, arg, function(data, response) {
+			            if(data != null){
+			                // si en réponse j'ai bien un gameid alors jenvoi l'info a tweet/fb
+			                if(data.gameid != null || data.gameid > 0){
+			                    // TWITTER
+			                    security.contacterServiceForToken(hosttwitter, function(tokens) {
 
-	                        var nomdujeux = "";
-	                        
-	                        var client2 = new restclient();
-	                        var arg2 = {
-	                            headers:
-	                            {
-	                                "Content-Type": "application/json",
-	                                "token": tokens,
-	                                "iduser":req.params.iduser,
-	                                "tweet": "Hey mec je joue a"+ nomdujeux + " !"
-	                            }
-	                        }
-	                        client2.post(hosttwitter+"/sendtweet", arg, function(aller, responseTwitter){
-	                            
-	                        }).on('error', function(error) {
-								gestion.gestionErreur(error);
-								//res.json({success : false});
-							});	
-	                    });
+			                        var nomdujeux = "";
+			                        
+			                        var client2 = new restclient();
+			                        var arg2 = {
+			                            headers:
+			                            {
+			                                "Content-Type": "application/json",
+			                                "token": tokens,
+			                                "iduser":req.params.iduser,
+			                                "tweet": "Hey mec je joue a"+ nomdujeux + " !"
+			                            }
+			                        }
+			                        client2.post(hosttwitter+"/sendtweet", arg, function(aller, responseTwitter){
+			                            
+			                        }).on('error', function(error) {
+										gestion.gestionErreur(error);
+										//res.json({success : false});
+									});	
+			                    });
 
-	                    //FB A FAIRE SI LE TEMPS
+			                    //FB A FAIRE SI LE TEMPS
 
 
-	                }
-	                res.json(data);
-	            }
-	        });
-	    }
-    });
+			                }
+			                res.json(data);
+			            }
+			        });
+			    }
+		    });
 
+		});
+	}
 }
