@@ -26,11 +26,11 @@ app.options('/api/*', function (request, response, next) {
     response.send();
 });
 
-
+//swagger
 app.use(swagger.init(app, {
     apiVersion: '1.0',
     swaggerVersion: '1.0',
-    basePath: 'http://localhost:' + port,
+    basePath: 'https://servuser.herokuapp.com',
     swaggerURL: '/swagger',
     swaggerUI: './public/swagger/',
     apis: ['./module/bddmysql.js','./module/security.js']

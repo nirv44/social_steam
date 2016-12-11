@@ -35,7 +35,7 @@ app.post('/roll', user.checkifplaying);
 app.use(swagger.init(app, {
     apiVersion: '1.0',
     swaggerVersion: '1.0',
-    basePath: 'http://localhost:' + port,
+    basePath: 'https://servicegateway.herokuapp.com',
     swaggerURL: '/swagger',
     swaggerUI: './public/swagger/',
     apis: ['./module/user_gateway.js']

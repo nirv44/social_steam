@@ -30,7 +30,7 @@ app.options('/api/*', function (request, response, next) {
 app.use(swagger.init(app, {
     apiVersion: '1.0',
     swaggerVersion: '1.0',
-    basePath: 'http://localhost:' + port,
+    basePath: 'https://servicetwitter.herokuapp.com',
     swaggerURL: '/swagger',
     swaggerUI: './public/swagger/',
     apis: ['./module/gestionTwitter.js']
