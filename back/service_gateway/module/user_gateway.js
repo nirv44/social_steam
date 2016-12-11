@@ -245,52 +245,42 @@ exports.Inscription = function(req, res) {
  *        - name: email
  *          description: Email de l'utilisateur (headers.data)
  *          paramType: headers
- *          required: true
  *          dataType: String
  *        - name: password
  *          description: Mot de passe de l'utilisateur (headers.data)
  *          paramType: headers
- *          required: true
  *          dataType: String
  *        - name: iduser
  *          description: Identifiant de l'utilisateur (headers.data)
  *          paramType: headers
- *          required: true
  *          dataType: String
  *        - name: steam_api_key
  *          description: Clé d'accès à l'API Steam (headers.data)
  *          paramType: headers
- *          required: true
  *          dataType: String
  *        - name: steam_id
  *          description: Identifiant Steam de l'utilisateur (headers.data)
  *          paramType: headers
- *          required: true
  *          dataType: String
  *        - name: iduser
  *          description: Identifiant de l'utilisateur (headers.data)
  *          paramType: headers
- *          required: true
  *          dataType: String
  *        - name: consumer_key
  *          description: Identifiant de l'utilisateur (headers.data)
  *          paramType: headers
- *          required: true
  *          dataType: String
  *        - name: consumer_secret
  *          description: Identifiant de l'utilisateur (headers.data)
  *          paramType: headers
- *          required: true
  *          dataType: String
  *        - name: access_token_key
  *          description: Identifiant de l'utilisateur (headers.data)
  *          paramType: headers
- *          required: true
  *          dataType: String
  *        - name: access_token_secret
  *          description: Identifiant de l'utilisateur (headers.data)
  *          paramType: headers
- *          required: true
  *          dataType: String
  */
 exports.modifierCompte = function(req, res) {
