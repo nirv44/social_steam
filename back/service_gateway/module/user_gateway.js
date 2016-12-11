@@ -94,7 +94,6 @@ exports.Connexion = function(req, res) {
 													var token = jwt.sign(req.body, secretGateway, {
 														expiresIn: 86400 // expires in 24 hours
 													});
-													console.log(token);
 													res.json({
 														success: true,
 														token: token

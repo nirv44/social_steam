@@ -235,11 +235,8 @@ exports.addUser = function(req, res) {
  *          dataType: string
  */
 exports.updateUser = function(req, res) {
-	console.log("yo");
 	var recup = secure.verifytoken(req);
 		if(recup != false){
-			console.log(req.headers);
-			console.log(req.params);
 		connection.query('UPDATE user SET ? WHERE id = ?', [JSON.parse(req.headers.data),req.params.id], function(err, result) {
 		  if (err) throw err;
 		  res.json(result);

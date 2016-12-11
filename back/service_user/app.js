@@ -27,7 +27,6 @@ app.options('/api/*', function (request, response, next) {
 });
 
 
-
 app.use(swagger.init(app, {
     apiVersion: '1.0',
     swaggerVersion: '1.0',
@@ -36,7 +35,6 @@ app.use(swagger.init(app, {
     swaggerUI: './public/swagger/',
     apis: ['./module/bddmysql.js','./module/security.js']
 }));
-
 
 
 app.get('/user', bdd.findByEmailPassUser);

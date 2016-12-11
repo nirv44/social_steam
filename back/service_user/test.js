@@ -115,29 +115,46 @@ describe("SERVICE USER -  unit test",function(){
     .end(function(err,res){
       res.status.should.equal(200);
 
-      
       res.body.success.should.equal(false);
 
       done();
     });
   });
 
-  it("LOGS - test 3",function(done){
 
+
+  it("LOGS - test 1",function(done){
     server
-    .get('/user')
+    .get('/logs')
     .expect("Content-type",/json/)
     .expect(200)
-    .set('data', '{"email":"test","password":"test"}')
-    .set('token',"")
+    .set('data', '{"login":"nico","mdp":"jemapellecommentstjames"}')
     .end(function(err,res){
       res.status.should.equal(200);
 
-      
+      res.body.success.should.equal(true);
+
+      res.body.should.have.property('token');
+
+      done();
+    });
+  });
+
+
+  it("LOGS - test 2",function(done){
+    server
+    .get('/logs')
+    .expect("Content-type",/json/)
+    .expect(200)
+    .set('data', '{"login":"","mdp":""}')
+    .end(function(err,res){
+      res.status.should.equal(200);
+
       res.body.success.should.equal(false);
 
       done();
     });
   });
+
 
 });
