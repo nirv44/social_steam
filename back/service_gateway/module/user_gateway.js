@@ -28,8 +28,7 @@ var secretGateway 	= gestion.recuperationInfos().secretGateway;
  *   -  httpMethod: POST
  *      summary: Connexion de l'utilisateur
  *      notes:  Connexion de l'utilisateur
- *      responseClass: Response
- *      nickname: Response
+ *      nickname: connexionUser
  *      consumes: 
  *        - text/html
  *      parameters:
@@ -38,7 +37,6 @@ var secretGateway 	= gestion.recuperationInfos().secretGateway;
  *          paramType: headers
  *          required: true
  *          dataType: String
- * 		parameters:
  *        - name: password
  *          description: Mot de passe de l'utilisateur (headers.data)
  *          paramType: headers
@@ -151,8 +149,7 @@ exports.Connexion = function(req, res) {
  *   -  httpMethod: POST
  *      summary: Enregistrement de l'utilisateur en base
  *      notes: Enregistrement de l'utilisateur en base
- *      responseClass: Response
- *      nickname: Response
+ *      nickname: inscriptionUser
  *      consumes: 
  *        - text/html
  *      parameters:
@@ -211,7 +208,6 @@ exports.Inscription = function(req, res) {
 					success: true
 				});
 			}).on('error', function(error) {
-				console.log(error);
 				gestion.gestionErreur(error);
 				res.json({success : false});
 			});	
@@ -242,8 +238,7 @@ exports.Inscription = function(req, res) {
  *   -  httpMethod: PUT
  *      summary: Modification des informations de l'utilisateur
  *      notes: Modification des informations de l'utilisateur
- *      responseClass: Response
- *      nickname: Response
+ *      nickname: modifierUser
  *      consumes: 
  *        - text/html
  *      parameters:
@@ -401,13 +396,3 @@ exports.checkifplaying = function(req, res){
     });
 
 }
-
-/**
- * @swagger
- * models:
- *   Response:
- *     id: Response
- *     properties:
- *       response:
- *         type: boolean
- */
