@@ -341,8 +341,8 @@ var parseUser = function(req){
  * path: /roll
  * operations:
  *   -  httpMethod: POST
- *      summary: Vérifie si l'utilisateur est connecté à Steam
- *      notes:  Vérifie si l'user est connecter a un jeux et envoi un tweet 
+ *      summary: Vérifie si l'utilisateur est connecté à Steam et twitter et envoi un Tweet d'information sur le jeu en cours
+ *      notes:  Vérifie si l'user est connecté a un jeux et envoi un tweet 
  *      nickname: roll
  *      consumes: 
  *        - text/html
