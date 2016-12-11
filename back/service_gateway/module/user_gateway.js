@@ -94,7 +94,8 @@ exports.Connexion = function(req, res) {
 													});
 													res.json({
 														success: true,
-														token: token
+														token: token,
+														iduser: data.id
 													});
 												}else{
 													res.json({success: false});
@@ -405,7 +406,10 @@ exports.checkifplaying = function(req, res){
 	                    });
 
 	                    //FB A FAIRE SI LE TEMPS
+
+
 	                }
+	                res.json(data);
 	            }
 	        });
 	    }
