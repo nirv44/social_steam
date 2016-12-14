@@ -43,13 +43,8 @@ var prepareClientTwitter = function(iduser){
  *      consumes: 
  *        - text/html
  *      parameters:
- *        - name: email
- *          description: Votre mail
- *          paramType: query
- *          required: true
- *          dataType: string
- *        - name: password
- *          description: Votre mot de passe
+ *        - name: iduser
+ *          description: Identifiant de l'utilisateur
  *          paramType: query
  *          required: true
  *          dataType: string
